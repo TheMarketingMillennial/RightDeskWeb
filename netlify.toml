@@ -1,0 +1,56 @@
+# ============================================================
+# netlify.toml — RightDesk Reports static site
+# Pure HTML/CSS/JS — no build step needed
+# ============================================================
+
+[build]
+  # No framework build command needed for static HTML
+  command   = ""
+  publish   = "."
+
+# ── Redirects ──────────────────────────────────────────────
+# Trailing-slash canonicalization (avoids duplicate content)
+[[redirects]]
+  from   = "/knowledge-center"
+  to     = "/knowledge-center/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-document-workplace-retaliation"
+  to     = "/knowledge-center/how-to-document-workplace-retaliation/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/wrongful-termination-documentation-checklist"
+  to     = "/knowledge-center/wrongful-termination-documentation-checklist/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-build-a-workplace-incident-timeline"
+  to     = "/knowledge-center/how-to-build-a-workplace-incident-timeline/"
+  status = 301
+
+# ── Security Headers ───────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-XSS-Protection       = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# ── Cache static assets ────────────────────────────────────
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"

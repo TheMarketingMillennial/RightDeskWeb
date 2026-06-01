@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | RightDesk Reports</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+
+  <style>
+    .error-page {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, #1e4a7c 55%, #0f2a47 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 24px 60px; text-align: center;
+    }
+    .error-inner { max-width: 560px; }
+    .error-code  { font-size: 120px; font-weight: 800; color: rgba(255,255,255,0.12); line-height: 1; margin-bottom: 0; }
+    .error-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 16px; margin-top: -16px; }
+    .error-desc  { font-size: 16px; color: var(--silver); line-height: 1.7; margin-bottom: 36px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="nav-logo">
+    <img src="assets/images/logo.png" alt="RightDesk Reports" />
+  </a>
+  <a href="/" class="nav-cta">← Home</a>
+</nav>
+
+<section class="error-page">
+  <div class="error-inner">
+    <div class="hero-logo" style="margin-bottom:24px;">
+      <img src="assets/images/logo.png" alt="RightDesk Reports" style="height:100px; filter:brightness(0) invert(1); opacity:0.7;" />
+    </div>
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-desc">
+      The page you're looking for doesn't exist or may have moved. Let's get you back on track.
+    </p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="/" class="btn-white">← Back to Home</a>
+      <a href="/knowledge-center/" class="btn-hero-secondary">Knowledge Center</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

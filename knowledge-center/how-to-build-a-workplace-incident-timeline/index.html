@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>How to Build a Workplace Incident Timeline | RightDesk Reports</title>
+  <meta name="description" content="Learn why workplace incident timelines are critical in employment cases and exactly how to build one that's clear, credible, and complete. A practical guide for employees." />
+  <link rel="canonical" href="https://www.rightdeskreports.com/knowledge-center/how-to-build-a-workplace-incident-timeline/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="https://www.rightdeskreports.com/knowledge-center/how-to-build-a-workplace-incident-timeline/" />
+  <meta property="og:title"       content="How to Build a Workplace Incident Timeline | RightDesk Reports" />
+  <meta property="og:description" content="Timelines are one of the most powerful tools in any employment case. Learn exactly how to build one that works." />
+  <meta property="og:image"       content="https://www.rightdeskreports.com/assets/images/og-image.png" />
+
+  <!-- Article schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Build a Workplace Incident Timeline",
+    "description": "A practical guide on building chronological workplace incident timelines for employment cases involving harassment, retaliation, or discrimination.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "RightDesk Reports",
+      "url": "https://www.rightdeskreports.com"
+    },
+    "url": "https://www.rightdeskreports.com/knowledge-center/how-to-build-a-workplace-incident-timeline/"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo.png" />
+
+  <style>
+    /* Timeline visual */
+    .timeline-demo {
+      position: relative; padding: 12px 0; margin: 28px 0;
+    }
+    .timeline-demo::before {
+      content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+      width: 2px; background: var(--light-grey);
+    }
+    .tl-entry {
+      position: relative; padding: 0 0 24px 52px;
+    }
+    .tl-dot {
+      position: absolute; left: 12px; top: 4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--navy); border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--navy);
+    }
+    .tl-dot.protected { background: #16A34A; box-shadow: 0 0 0 2px #16A34A; }
+    .tl-dot.incident  { background: #DC2626; box-shadow: 0 0 0 2px #DC2626; }
+    .tl-dot.report    { background: var(--navy-mid); box-shadow: 0 0 0 2px var(--navy-mid); }
+    .tl-date  { font-size: 12px; font-weight: 700; color: var(--grey); margin-bottom: 3px; }
+    .tl-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .tl-desc  { font-size: 13px; color: var(--grey); line-height: 1.5; }
+    .tl-legend {
+      display: flex; gap: 20px; flex-wrap: wrap; margin: 16px 0 24px;
+      background: var(--off-white); border-radius: 10px; padding: 12px 16px;
+    }
+    .tl-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--grey); }
+    .tl-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    .entry-template {
+      background: var(--off-white); border: 1.5px solid var(--light-grey);
+      border-radius: 12px; padding: 20px 22px; margin: 20px 0;
+    }
+    .entry-template-label { font-size: 11px; font-weight: 700; color: var(--navy-mid); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .entry-field { margin-bottom: 12px; }
+    .entry-field-name  { font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+    .entry-field-value { font-size: 13px; color: var(--grey); line-height: 1.5; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="nav-logo">
+    <img src="../../assets/images/logo.png" alt="RightDesk Reports" />
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/#features">Features</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/knowledge-center/">Knowledge Center</a></li>
+    <li><a href="/#beta">Join Beta</a></li>
+    <li><a href="/#beta" class="nav-cta-mobile">Get Started Free →</a></li>
+  </ul>
+  <a href="/#beta" class="nav-cta">Join Beta →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ARTICLE HERO -->
+<section class="article-hero">
+  <div class="container-narrow">
+    <div class="breadcrumb" style="justify-content:center; margin-bottom:20px;">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/knowledge-center/">Knowledge Center</a>
+      <span>/</span>
+      <span style="color:white;">Incident Timeline</span>
+    </div>
+    <h1>How to Build a Workplace Incident Timeline</h1>
+    <p>Timelines are one of the most powerful tools in any employment case. Here's exactly how to build one that's clear, credible, and complete.</p>
+    <div class="article-meta">
+      <span class="tag">📅 Documentation</span>
+      <span>Updated 2025</span>
+      <span>9 min read</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <div class="disclaimer-box">
+    <p><strong>Educational content only.</strong> This guide is for informational purposes and does not constitute legal advice. Please consult a licensed employment attorney for advice specific to your situation.</p>
+  </div>
+
+  <h2>Why Timelines Matter in Employment Cases</h2>
+  <p>In employment law, <strong>timing is everything.</strong> The most common way to demonstrate retaliation, discrimination, or a hostile work environment is to show a clear "before and after" — evidence that conditions deteriorated specifically after a protected action or that a pattern of mistreatment developed over time.</p>
+  <p>A well-constructed workplace incident timeline does three critical things:</p>
+  <ul>
+    <li><strong>It establishes proximity.</strong> Courts and investigators look at how close in time a negative action was to a protected activity. A termination one week after filing an HR complaint tells a very different story than one two years later.</li>
+    <li><strong>It reveals patterns.</strong> Individual incidents may seem minor in isolation. Together, they can establish a pattern of harassment, discrimination, or a hostile work environment that would not be visible otherwise.</li>
+    <li><strong>It builds credibility.</strong> A detailed, factual, chronological account is far more persuasive than a general complaint. It shows that you were paying attention and that your concerns are specific and documented — not vague feelings.</li>
+  </ul>
+
+  <h2>What a Timeline Should Include</h2>
+  <p>Your timeline is a chronological log of events relevant to your workplace situation. It should include:</p>
+  <ul>
+    <li>Protected activities you engaged in (complaints, accommodation requests, leave taken)</li>
+    <li>Incidents of harassment, discrimination, retaliation, or mistreatment</li>
+    <li>Formal actions taken by your employer (warnings, PIPs, demotions, termination)</li>
+    <li>Your responses to those actions</li>
+    <li>Key witnesses and what they observed</li>
+    <li>Communications that are relevant (emails, messages, written warnings)</li>
+  </ul>
+
+  <h2>What a Good Timeline Entry Looks Like</h2>
+  <p>Each entry in your timeline should be specific, factual, and consistent. Here is the template to follow for every entry:</p>
+
+  <div class="entry-template">
+    <div class="entry-template-label">Entry Template</div>
+    <div class="entry-field">
+      <div class="entry-field-name">Date &amp; Time</div>
+      <div class="entry-field-value">March 14, 2025 — approximately 2:30 PM</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">Location</div>
+      <div class="entry-field-value">Manager's office, 4th floor, [Company Name] headquarters</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">Who Was Present</div>
+      <div class="entry-field-value">Myself; [Manager's Name], Director of Operations; [Colleague's Name], HR Business Partner</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">What Happened (Use Direct Quotes)</div>
+      <div class="entry-field-value">[Manager] said: "Your attitude has been a problem since you went to HR." I asked what they meant. They said: "You know what I mean. Just watch yourself." No further explanation was given.</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">Connection to Protected Activity</div>
+      <div class="entry-field-value">This occurred 6 days after I submitted a formal harassment complaint to HR on March 8, 2025.</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">Impact</div>
+      <div class="entry-field-value">I felt intimidated and afraid to report future incidents. My work performance was affected due to anxiety.</div>
+    </div>
+    <div class="entry-field">
+      <div class="entry-field-name">Evidence</div>
+      <div class="entry-field-value">Email follow-up I sent to HR on March 14 at 3:15 PM summarizing the conversation [saved as Exhibit A]</div>
+    </div>
+  </div>
+
+  <h2>A Sample Timeline in Practice</h2>
+  <p>Here is a simplified example of what a timeline might look like for a retaliation case:</p>
+
+  <div class="tl-legend">
+    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:#16A34A;"></div> Protected Activity</div>
+    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:#DC2626;"></div> Retaliatory Incident</div>
+    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--navy-mid);"></div> Report / Response</div>
+  </div>
+
+  <div class="timeline-demo">
+    <div class="tl-entry">
+      <div class="tl-dot protected"></div>
+      <div class="tl-date">February 2, 2025</div>
+      <div class="tl-title">Submitted harassment complaint to HR</div>
+      <div class="tl-desc">Submitted a written complaint about repeated comments made by [Supervisor Name]. Received email confirmation of receipt from HR.</div>
+    </div>
+    <div class="tl-entry">
+      <div class="tl-dot report"></div>
+      <div class="tl-date">February 5, 2025</div>
+      <div class="tl-title">Met with HR for initial interview</div>
+      <div class="tl-desc">HR Business Partner [Name] conducted intake interview. Meeting lasted approximately 40 minutes.</div>
+    </div>
+    <div class="tl-entry">
+      <div class="tl-dot incident"></div>
+      <div class="tl-date">February 10, 2025</div>
+      <div class="tl-title">Removed from key project team</div>
+      <div class="tl-desc">[Supervisor] sent email removing me from the Q2 product launch team. No reason given. I had been on this team for 7 months without issue prior to my complaint.</div>
+    </div>
+    <div class="tl-entry">
+      <div class="tl-dot incident"></div>
+      <div class="tl-date">February 18, 2025</div>
+      <div class="tl-title">First negative performance note in 2 years</div>
+      <div class="tl-desc">[Supervisor] issued a written warning about "attitude and engagement." My last three annual reviews (2022–2024) all rated me "Exceeds Expectations."</div>
+    </div>
+    <div class="tl-entry">
+      <div class="tl-dot report"></div>
+      <div class="tl-date">February 20, 2025</div>
+      <div class="tl-title">Filed second complaint with HR regarding retaliation</div>
+      <div class="tl-desc">Submitted written complaint documenting both incidents above and connecting them to my February 2 harassment report.</div>
+    </div>
+    <div class="tl-entry">
+      <div class="tl-dot incident"></div>
+      <div class="tl-date">March 1, 2025</div>
+      <div class="tl-title">Placed on a Performance Improvement Plan (PIP)</div>
+      <div class="tl-desc">Received a 30-day PIP citing "ongoing performance concerns." This is the first PIP in my 4 years of employment.</div>
+    </div>
+  </div>
+
+  <p>Notice how this timeline clearly shows the pattern: each negative action followed a protected activity, and there is no prior history of performance issues before the complaint. That contrast is exactly what attorneys and investigators look for.</p>
+
+  <h2>Step-by-Step: Building Your Timeline</h2>
+
+  <h3>Step 1: Start from the beginning</h3>
+  <p>Don't start your timeline at the point things got bad. Start with your employment history: when you were hired, your role, your performance record, and any positive milestones. This establishes a baseline that makes the change in treatment visible by contrast.</p>
+
+  <h3>Step 2: Document every protected activity</h3>
+  <p>List every time you engaged in a legally protected activity: complaint to HR, request for accommodation, leave taken, participation in an investigation, or report of illegal conduct. Include the exact date, what you said or submitted, and who received it.</p>
+
+  <h3>Step 3: Log every adverse action</h3>
+  <p>Record every negative thing that happened to you at work after those protected activities. Even small things matter — exclusion from meetings, changes in tone from management, being denied resources. Note whether each event occurred before or after the protected activity.</p>
+
+  <h3>Step 4: Note the gap (or lack of gap)</h3>
+  <p>Explicitly note the time between your protected activity and each adverse action. Three days. Two weeks. One month. The shorter the gap, the stronger the evidence of retaliation. In legal proceedings, this is called "temporal proximity."</p>
+
+  <h3>Step 5: Attach supporting evidence to each entry</h3>
+  <p>Every entry in your timeline should point to supporting evidence. This might be:</p>
+  <ul>
+    <li>An email you sent or received</li>
+    <li>A screenshot of a message</li>
+    <li>A written warning or PIP document</li>
+    <li>A photo of a physical document</li>
+    <li>Notes you took immediately after an event</li>
+  </ul>
+  <p>Label each piece of evidence (e.g., "Exhibit A," "Exhibit B") and reference the label in your timeline entry.</p>
+
+  <h3>Step 6: Review for accuracy and completeness</h3>
+  <p>Read through your timeline as if you were seeing it for the first time. Ask yourself: Is the sequence of events clear? Are there gaps? Does the timeline explain the "before" as well as the "after"? Would someone unfamiliar with the situation understand what happened?</p>
+
+  <h2>Common Timeline Mistakes</h2>
+  <ul>
+    <li><strong>Using vague dates:</strong> "Sometime in the fall" is not useful. Use exact dates whenever possible.</li>
+    <li><strong>Including opinions instead of facts:</strong> "He was clearly retaliating" is an opinion. "He assigned me to the overnight shift two days after my HR complaint" is a fact.</li>
+    <li><strong>Starting too late:</strong> Begin before the problem started, to show what normal looked like.</li>
+    <li><strong>Mixing personal grievances with legal incidents:</strong> Keep your timeline focused on legally relevant events, not general frustrations.</li>
+    <li><strong>Failing to update it:</strong> Continue adding entries as new incidents occur. A living timeline is more powerful than a retrospective one.</li>
+  </ul>
+
+  <h2>How RightDesk Reports Automates This Process</h2>
+  <p><a href="/">RightDesk Reports</a> is built around exactly this workflow. Every time you log an incident in the app, it is automatically organized chronologically on your Violation Calendar. You can attach photos, notes, and details. When you're ready, the app generates a professional Retaliation Timeline report — formatted and ready to share with HR or an employment attorney.</p>
+  <p>Everything stays on your device, private and secure, until you decide to share it.</p>
+
+  <!-- CTA BOX -->
+  <div class="cta-box">
+    <h3>Build Your Timeline Automatically</h3>
+    <p>RightDesk Reports logs every incident and builds your timeline for you — organized, professional, and ready when you need it.</p>
+    <a href="/#beta" class="btn-white">Get Free Beta Access →</a>
+  </div>
+
+  <div class="disclaimer-box">
+    <p><strong>Disclaimer:</strong> This guide is for educational and informational purposes only and does not constitute legal advice. Employment laws vary by state and jurisdiction. Please consult a licensed employment attorney for guidance specific to your situation.</p>
+  </div>
+
+</article>
+
+<!-- RELATED ARTICLES -->
+<section class="related-articles">
+  <div class="container">
+    <h2 style="text-align:center; color:var(--navy); margin-bottom:8px;">Related Guides</h2>
+    <p style="text-align:center; color:var(--grey); margin-bottom:0;">Continue building your knowledge</p>
+    <div class="related-grid">
+      <a href="../how-to-document-workplace-retaliation/" class="related-card">
+        <div class="related-card-label">Retaliation</div>
+        <div class="related-card-title">How to Document Workplace Retaliation</div>
+        <div class="related-card-arrow">Read →</div>
+      </a>
+      <a href="../wrongful-termination-documentation-checklist/" class="related-card">
+        <div class="related-card-label">Wrongful Termination</div>
+        <div class="related-card-title">Wrongful Termination Documentation Checklist</div>
+        <div class="related-card-arrow">Read →</div>
+      </a>
+      <a href="../" class="related-card">
+        <div class="related-card-label">Knowledge Center</div>
+        <div class="related-card-title">View All Educational Guides</div>
+        <div class="related-card-arrow">Browse →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-logo">
+    <img src="../../assets/images/logo.png" alt="RightDesk Reports" />
+  </div>
+  <div class="footer-links">
+    <a href="/#features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/knowledge-center/">Knowledge Center</a>
+    <a href="/#beta">Join Beta</a>
+    <a href="https://sites.google.com/view/rightdeskreportsprivacypolicy/home" target="_blank" rel="noopener">Privacy Policy</a>
+  </div>
+  <p class="footer-copy">© 2025 RightDesk Reports. Employees First. Always.<br/>
+  <small>Educational content is for informational purposes only and does not constitute legal advice.</small></p>
+</footer>
+
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>
