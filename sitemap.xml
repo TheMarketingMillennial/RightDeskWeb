@@ -1,37 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Homepage -->
   <url>
     <loc>https://www.rightdeskreports.com/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- Knowledge Center Index -->
   <url>
     <loc>https://www.rightdeskreports.com/knowledge-center/</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- Original 3 Articles -->
   <url>
     <loc>https://www.rightdeskreports.com/knowledge-center/how-to-document-workplace-retaliation/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.rightdeskreports.com/knowledge-center/wrongful-termination-documentation-checklist/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.rightdeskreports.com/knowledge-center/how-to-build-a-workplace-incident-timeline/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 12 New Articles -->
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/how-to-report-harassment-to-hr/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/what-to-do-if-employer-retaliates-after-complaint/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/workplace-discrimination-documentation-guide/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/how-to-write-an-hr-complaint-letter/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/signs-youre-being-pushed-out-of-your-job/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/how-to-prepare-for-hr-meeting/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/what-is-a-hostile-work-environment/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/how-to-document-wage-theft/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/your-rights-during-workplace-investigation/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/how-to-talk-to-employment-lawyer/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/best-way-to-keep-a-work-journal/</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rightdeskreports.com/knowledge-center/documentation-mistakes-employees-make/</loc>
+    <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
