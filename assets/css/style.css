@@ -419,6 +419,39 @@ section { padding: 80px 24px; }
 .step-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; padding-top: 6px; }
 .step-desc  { font-size: 14px; color: var(--grey); line-height: 1.6; }
 
+/* ── APP STORE BUTTONS ── */
+.store-buttons {
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+  margin-top: 28px;
+}
+.store-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 10px;
+  text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+  min-width: 160px;
+}
+.store-btn:hover { opacity: 0.88; transform: translateY(-2px); text-decoration: none; }
+.store-btn-google {
+  background: #000; color: white;
+  border: 1.5px solid #333;
+}
+.store-btn-apple {
+  background: #F0F0F0; color: #333;
+  border: 1.5px solid #D0D0D0;
+  cursor: default; opacity: 0.75;
+}
+.store-btn-apple:hover { opacity: 0.75; transform: none; }
+.store-btn-icon { font-size: 22px; flex-shrink: 0; }
+.store-btn-icon img { height: 22px; width: auto; }
+.store-btn-text { display: flex; flex-direction: column; }
+.store-btn-label { font-size: 10px; font-weight: 400; letter-spacing: 0.3px; opacity: 0.75; line-height: 1.2; }
+.store-btn-name  { font-size: 15px; font-weight: 700; line-height: 1.3; }
+
+/* Form store buttons (on white bg) */
+.store-buttons-form { margin-top: 24px; }
+.store-buttons-form .store-btn-google { background: #1a1a1a; }
+.store-buttons-form .store-btn-apple  { background: #f5f5f5; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -446,4 +479,7 @@ section { padding: 80px 24px; }
   .btn-primary, .btn-hero-secondary { justify-content: center; }
   .hero-logo img { height: 160px; }
   .nav-logo img  { height: 80px; }
+  .store-buttons { justify-content: center; }
+  .store-btn { min-width: 140px; }
+  .store-btn-name { font-size: 13px; }
 }
