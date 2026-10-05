@@ -11,6 +11,11 @@
 # ── Redirects ──────────────────────────────────────────────
 # Trailing-slash canonicalization (avoids duplicate content)
 [[redirects]]
+  from   = "/for-attorneys"
+  to     = "/for-attorneys/"
+  status = 301
+
+[[redirects]]
   from   = "/knowledge-center"
   to     = "/knowledge-center/"
   status = 301

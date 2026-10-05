@@ -71,6 +71,62 @@
     }
   }
 
+  /* ── PRICING TOGGLE ── */
+  window.setBilling = function (mode) {
+    var monthly = document.querySelectorAll('.price-monthly');
+    var annual  = document.querySelectorAll('.price-annual');
+    var btnM    = document.getElementById('toggle-monthly');
+    var btnA    = document.getElementById('toggle-annual');
+    var essBtn  = document.getElementById('essential-btn');
+    var preBtn  = document.getElementById('premium-btn');
+
+    if (mode === 'monthly') {
+      monthly.forEach(function (el) { el.style.display = ''; });
+      annual.forEach(function  (el) { el.style.display = 'none'; });
+      if (btnM) { btnM.classList.add('active'); }
+      if (btnA) { btnA.classList.remove('active'); }
+      if (essBtn) { essBtn.textContent = 'Get Started — $9.99/mo'; }
+      if (preBtn) { preBtn.textContent = 'Get Premium — $14.99/mo'; }
+    } else {
+      monthly.forEach(function (el) { el.style.display = 'none'; });
+      annual.forEach(function  (el) { el.style.display = ''; });
+      if (btnM) { btnM.classList.remove('active'); }
+      if (btnA) { btnA.classList.add('active'); }
+      if (essBtn) { essBtn.textContent = 'Get Started — $59.99/yr'; }
+      if (preBtn) { preBtn.textContent = 'Get Premium — $99.99/yr'; }
+    }
+  };
+
+  /* ── ATTORNEY FORM — Netlify AJAX submit ── */
+  var attorneyForm    = document.getElementById('attorney-form');
+  var attorneyContent = document.getElementById('attorney-form-content');
+  var attorneySuccess = document.getElementById('attorney-form-success');
+
+  if (attorneyForm) {
+    attorneyForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var submitBtn = attorneyForm.querySelector('.form-submit');
+      submitBtn.textContent = 'Submitting…';
+      submitBtn.disabled = true;
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(attorneyForm)).toString(),
+      })
+        .then(function () { showAttorneySuccess(); })
+        .catch(function () { showAttorneySuccess(); });
+    });
+  }
+
+  function showAttorneySuccess() {
+    if (attorneyContent) attorneyContent.style.display = 'none';
+    if (attorneySuccess) {
+      attorneySuccess.style.display = 'block';
+      attorneySuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   /* ── SMOOTH SCROLL for anchor links ── */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {

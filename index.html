@@ -187,10 +187,16 @@
 ═══════════════════════════════════════ -->
 <section id="pricing">
   <div class="container">
-    <div style="text-align:center; margin-bottom:52px;">
+    <div style="text-align:center; margin-bottom:40px;">
       <span class="section-label" style="display:block; text-align:center;">Pricing</span>
       <h2 class="section-title" style="text-align:center;">Simple, Transparent Pricing</h2>
       <p class="section-sub" style="margin:0 auto; text-align:center;">Start free. Upgrade when you need more.</p>
+
+      <!-- BILLING TOGGLE -->
+      <div class="billing-toggle" id="billing-toggle">
+        <button class="toggle-btn active" id="toggle-monthly" onclick="setBilling('monthly')">Monthly</button>
+        <button class="toggle-btn" id="toggle-annual" onclick="setBilling('annual')">Annual <span class="toggle-save">Save 50%</span></button>
+      </div>
     </div>
 
     <div class="pricing-grid">
@@ -198,7 +204,7 @@
       <!-- FREE -->
       <div class="pricing-card">
         <div class="pricing-plan">Free</div>
-        <div class="pricing-tagline">Get started for free</div>
+        <div class="pricing-tagline">Get started at no cost</div>
         <div class="pricing-price">Free</div>
         <div class="pricing-period">&nbsp;</div>
         <ul class="pricing-features">
@@ -215,11 +221,21 @@
 
       <!-- ESSENTIAL -->
       <div class="pricing-card featured">
-        <div class="pricing-badge">⭐ BEST VALUE</div>
+        <div class="pricing-badge">⭐ MOST POPULAR</div>
         <div class="pricing-plan">Essential</div>
-        <div class="pricing-tagline">Most popular for employees</div>
-        <div class="pricing-price"><sup>$</sup>29<span>.99</span></div>
-        <div class="pricing-period">/year</div>
+        <div class="pricing-tagline">For employees who need to act</div>
+
+        <!-- Monthly price -->
+        <div class="price-monthly">
+          <div class="pricing-price"><sup>$</sup>9<span>.99</span></div>
+          <div class="pricing-period">/month</div>
+        </div>
+        <!-- Annual price -->
+        <div class="price-annual" style="display:none;">
+          <div class="pricing-price"><sup>$</sup>59<span>.99</span></div>
+          <div class="pricing-period">/year &nbsp;<span style="color:var(--green);font-weight:700;font-size:11px;">2 months free</span></div>
+        </div>
+
         <ul class="pricing-features">
           <li><span class="check">✓</span> Unlimited incident logging</li>
           <li><span class="check">✓</span> All calendar &amp; list features</li>
@@ -233,15 +249,25 @@
           <li class="dim"><span class="cross">⊖</span> Termination Prep (Premium)</li>
           <li class="dim"><span class="cross">⊖</span> Attorney-Ready Packet (Premium)</li>
         </ul>
-        <a href="https://play.google.com/store/apps/details?id=com.rightdeskreport.report" target="_blank" rel="noopener" class="pricing-btn primary">Get Started — $29.99/yr</a>
+        <a href="https://play.google.com/store/apps/details?id=com.rightdeskreport.report" target="_blank" rel="noopener" class="pricing-btn primary" id="essential-btn">Get Started — $9.99/mo</a>
       </div>
 
       <!-- PREMIUM -->
       <div class="pricing-card">
         <div class="pricing-plan">Premium</div>
         <div class="pricing-tagline">Full legal-grade documentation</div>
-        <div class="pricing-price"><sup>$</sup>79<span>.99</span></div>
-        <div class="pricing-period">/year</div>
+
+        <!-- Monthly price -->
+        <div class="price-monthly">
+          <div class="pricing-price"><sup>$</sup>14<span>.99</span></div>
+          <div class="pricing-period">/month</div>
+        </div>
+        <!-- Annual price -->
+        <div class="price-annual" style="display:none;">
+          <div class="pricing-price"><sup>$</sup>99<span>.99</span></div>
+          <div class="pricing-period">/year &nbsp;<span style="color:var(--green);font-weight:700;font-size:11px;">2 months free</span></div>
+        </div>
+
         <ul class="pricing-features">
           <li><span class="check">✓</span> Everything in Essential</li>
           <li><span class="check">✓</span> Termination Prep report</li>
@@ -249,22 +275,29 @@
           <li><span class="check">✓</span> Priority AI generation</li>
           <li><span class="check">✓</span> Legal-grade formatting</li>
           <li><span class="check">✓</span> Evidence inventory in reports</li>
+          <li><span class="check">✓</span> <a href="for-attorneys/" style="color:var(--navy-mid);font-weight:600;">Attorney directory access</a> ⚖️</li>
         </ul>
-        <a href="https://play.google.com/store/apps/details?id=com.rightdeskreport.report" target="_blank" rel="noopener" class="pricing-btn outline">Get Premium — $79.99/yr</a>
+        <a href="https://play.google.com/store/apps/details?id=com.rightdeskreport.report" target="_blank" rel="noopener" class="pricing-btn outline" id="premium-btn">Get Premium — $14.99/mo</a>
       </div>
 
     </div>
+  </div>
+</section>
 
-    <!-- ONE-TIME KIT -->
-    <div class="kit-card">
-      <div class="kit-icon">⚖️</div>
-      <div class="kit-info">
-        <div class="kit-title">Workplace Report Kit</div>
-        <p class="kit-desc">One-time purchase — generate a full Attorney-Ready Packet without a subscription.</p>
+<!-- ═══════════════════════════════════════
+     ATTORNEY BANNER
+═══════════════════════════════════════ -->
+<section style="background:var(--off-white); padding:48px 24px;">
+  <div class="container">
+    <div class="attorney-banner">
+      <div class="attorney-banner-icon">⚖️</div>
+      <div class="attorney-banner-body">
+        <div class="attorney-banner-label">For Employment Attorneys</div>
+        <div class="attorney-banner-title">Reach Clients Who Already Have Documentation</div>
+        <p class="attorney-banner-desc">RightDesk users generate professional incident reports before they search for a lawyer. List your practice in our attorney directory and receive warm, pre-qualified referrals in your area.</p>
       </div>
-      <div class="kit-price">
-        <div class="kit-amount">$39.99</div>
-        <div class="kit-once">one-time</div>
+      <div class="attorney-banner-cta">
+        <a href="for-attorneys/" class="btn-white">Partner With Us →</a>
       </div>
     </div>
   </div>
@@ -421,6 +454,7 @@
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
     <a href="knowledge-center/">Knowledge Center</a>
+    <a href="for-attorneys/">For Attorneys</a>
     <a href="#get-the-app">Get the App</a>
     <a href="https://sites.google.com/view/rightdeskreportsprivacypolicy/home" target="_blank" rel="noopener">Privacy Policy</a>
   </div>
