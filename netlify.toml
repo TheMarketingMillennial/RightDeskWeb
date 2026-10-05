@@ -30,6 +30,66 @@
   to     = "/knowledge-center/how-to-build-a-workplace-incident-timeline/"
   status = 301
 
+[[redirects]]
+  from   = "/knowledge-center/how-to-report-harassment-to-hr"
+  to     = "/knowledge-center/how-to-report-harassment-to-hr/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/what-to-do-if-employer-retaliates-after-complaint"
+  to     = "/knowledge-center/what-to-do-if-employer-retaliates-after-complaint/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/workplace-discrimination-documentation-guide"
+  to     = "/knowledge-center/workplace-discrimination-documentation-guide/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-write-an-hr-complaint-letter"
+  to     = "/knowledge-center/how-to-write-an-hr-complaint-letter/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/signs-youre-being-pushed-out-of-your-job"
+  to     = "/knowledge-center/signs-youre-being-pushed-out-of-your-job/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-prepare-for-hr-meeting"
+  to     = "/knowledge-center/how-to-prepare-for-hr-meeting/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/what-is-a-hostile-work-environment"
+  to     = "/knowledge-center/what-is-a-hostile-work-environment/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-document-wage-theft"
+  to     = "/knowledge-center/how-to-document-wage-theft/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/your-rights-during-workplace-investigation"
+  to     = "/knowledge-center/your-rights-during-workplace-investigation/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/how-to-talk-to-employment-lawyer"
+  to     = "/knowledge-center/how-to-talk-to-employment-lawyer/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/best-way-to-keep-a-work-journal"
+  to     = "/knowledge-center/best-way-to-keep-a-work-journal/"
+  status = 301
+
+[[redirects]]
+  from   = "/knowledge-center/documentation-mistakes-employees-make"
+  to     = "/knowledge-center/documentation-mistakes-employees-make/"
+  status = 301
+
 # ── Security Headers ───────────────────────────────────────
 [[headers]]
   for = "/*"
