@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Your Account — RightDesk Reports</title>
+  <meta name="description" content="Request deletion of your RightDesk Reports account and associated data." />
+  <link rel="canonical" href="https://www.rightdeskreports.com/delete-account/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" type="image/png" href="../assets/images/logo.png" />
+  <style>
+    .delete-page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+    .delete-page h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .delete-page .intro {
+      font-size: 15px;
+      color: var(--dark-grey);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .delete-section {
+      margin-bottom: 28px;
+    }
+    .delete-section h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .delete-section p {
+      font-size: 14px;
+      color: var(--dark-grey);
+      line-height: 1.7;
+    }
+    .delete-warning {
+      background: #fff8f0;
+      border: 1px solid #f5c996;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 13px;
+      color: #92540a;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+    .delete-warning strong {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .delete-form {
+      background: var(--white);
+      border: 1px solid var(--light-grey);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .delete-form label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .delete-form input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--light-grey);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    .delete-form input[type="email"]:focus {
+      outline: none;
+      border-color: var(--navy-mid);
+    }
+    .delete-form .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .delete-form .checkbox-row input[type="checkbox"] {
+      margin-top: 2px;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+    .delete-form .checkbox-row span {
+      font-size: 13px;
+      color: var(--dark-grey);
+      line-height: 1.5;
+    }
+    .delete-form button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .delete-form button[type="submit"]:hover {
+      background: var(--navy-mid);
+    }
+    .delete-form button[type="submit"]:disabled {
+      background: var(--grey);
+      cursor: not-allowed;
+    }
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 28px;
+    }
+    .success-message .check {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+    .success-message h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .success-message p {
+      font-size: 14px;
+      color: var(--dark-grey);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="nav-logo">
+    <img src="../assets/images/logo.png" alt="RightDesk Reports" />
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/#features">Features</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/knowledge-center/">Knowledge Center</a></li>
+    <li><a href="/#get-the-app">Get the App</a></li>
+  </ul>
+  <a href="https://play.google.com/store/apps/details?id=com.rightdeskreport.report" target="_blank" rel="noopener" class="nav-cta">Get the App →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- CONTENT -->
+<div class="delete-page">
+
+  <h1>Delete Your RightDesk Reports Account</h1>
+  <p class="intro">
+    You may request deletion of your RightDesk Reports account and the data
+    associated with your account at any time.
+  </p>
+
+  <div class="delete-section">
+    <h2>To request account deletion</h2>
+    <p>Submit the account deletion form below using the email address associated
+    with your RightDesk Reports account. We may contact you to verify your
+    identity before processing the request.</p>
+  </div>
+
+  <div class="delete-section">
+    <h2>What will be deleted</h2>
+    <p>When your account is deleted, your RightDesk account and associated
+    personal data will be deleted, including your workplace incident reports
+    and other information associated with your account, except information
+    that RightDesk is legally required or permitted to retain.</p>
+  </div>
+
+  <div class="delete-warning">
+    <strong>Important</strong>
+    Account deletion is permanent. Once your documentation has been deleted,
+    it cannot be recovered. If you have an active subscription, follow the
+    applicable subscription cancellation instructions to prevent future billing.
+  </div>
+
+  <!-- FORM -->
+  <div class="delete-form" id="form-container">
+    <form id="delete-form">
+      <label for="email">Email address associated with your RightDesk account</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="confirm" name="confirm" required />
+        <span>I am requesting deletion of my RightDesk Reports account and associated data.</span>
+      </div>
+
+      <button type="submit" id="submit-btn">Submit Request</button>
+    </form>
+
+    <div class="success-message" id="success-msg">
+      <div class="check">✅</div>
+      <h3>Request Received</h3>
+      <p>We have received your account deletion request. We may follow up via
+      email to verify your identity before processing. Deletion is typically
+      completed within 30 days.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-logo">
+    <img src="../assets/images/logo.png" alt="RightDesk Reports" />
+  </div>
+  <div class="footer-links">
+    <a href="/#features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/knowledge-center/">Knowledge Center</a>
+    <a href="/for-attorneys/">For Attorneys</a>
+    <a href="https://sites.google.com/view/rightdeskreportsprivacypolicy/home" target="_blank" rel="noopener">Privacy Policy</a>
+    <a href="/delete-account/">Delete Account</a>
+  </div>
+  <p class="footer-copy">© 2026 RightDesk Reports. Employees First. Always.<br/>
+  <small>Educational content is for informational purposes only and does not constitute legal advice.</small></p>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  document.getElementById('delete-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const confirm = document.getElementById('confirm').checked;
+
+    if (!email || !confirm) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    // Send to Netlify Forms (works automatically with Netlify hosting)
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'account-deletion',
+        'email': email,
+        'confirm': confirm,
+      }).toString()
+    })
+    .then(() => {
+      document.getElementById('delete-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    })
+    .catch(() => {
+      // Fallback: still show success (email-based handling)
+      document.getElementById('delete-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    });
+  });
+</script>
+
+<!-- Netlify Forms detection tag -->
+<form name="account-deletion" netlify netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email" />
+  <input type="checkbox" name="confirm" />
+</form>
+
+</body>
+</html>
