@@ -1,6 +1,6 @@
 /* ============================================================
    RightDesk Reports — main.js
-   Handles: hamburger nav toggle, smooth scroll, beta form AJAX
+   Handles: hamburger nav toggle, smooth scroll, contact form AJAX
    ============================================================ */
 
 (function () {
@@ -33,20 +33,20 @@
     });
   }
 
-  /* ── BETA SIGNUP FORM — Netlify AJAX submit ── */
-  const betaForm    = document.getElementById('beta-form');
+  /* ── CONTACT FORM — Netlify AJAX submit ── */
+  const contactForm = document.getElementById('beta-form');
   const formContent = document.getElementById('form-content');
   const formSuccess = document.getElementById('form-success');
 
-  if (betaForm) {
-    betaForm.addEventListener('submit', function (e) {
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const submitBtn = betaForm.querySelector('.form-submit');
+      const submitBtn = contactForm.querySelector('.form-submit');
       submitBtn.textContent = 'Submitting…';
       submitBtn.disabled = true;
 
-      const data = new FormData(betaForm);
+      const data = new FormData(contactForm);
 
       fetch('/', {
         method: 'POST',
