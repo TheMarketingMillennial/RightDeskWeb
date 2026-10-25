@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RightDesk Reports — Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1A3660;
+      --navy-dark: #122548;
+      --powder:    #9BB8D7;
+      --gold:      #C9A84C;
+      --gold-dark: #a8872e;
+      --bg:        #F4F6F8;
+      --white:     #ffffff;
+      --grey-lt:   #E8ECF0;
+      --grey-md:   #8A99AA;
+      --grey-dk:   #3D4F61;
+      --red:       #C0392B;
+      --red-lt:    #fdf0ef;
+      --green:     #1a7a4a;
+      --green-lt:  #edf7f2;
+      --radius:    10px;
+      --shadow:    0 2px 12px rgba(26,54,96,0.10);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--grey-dk);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── Auth Screen ──────────────────────────────────────────────────────── */
+    #auth-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .auth-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .auth-logo svg { flex-shrink: 0; }
+
+    .auth-logo-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .auth-logo-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--grey-md);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .auth-card h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .auth-card p {
+      color: var(--grey-md);
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    /* ─── Form Elements ────────────────────────────────────────────────────── */
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--grey-dk);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--grey-lt);
+      border-radius: var(--radius);
+      font-size: 14px;
+      color: var(--grey-dk);
+      background: var(--white);
+      transition: border-color 0.15s;
+      outline: none;
+      font-family: inherit;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--navy);
+    }
+
+    .field { margin-bottom: 16px; }
+
+    /* ─── Buttons ──────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s, opacity 0.15s, transform 0.1s;
+      text-decoration: none;
+    }
+
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      width: 100%;
+      height: 46px;
+    }
+
+    .btn-primary:hover:not(:disabled) { background: var(--navy-dark); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    .btn-gold:hover:not(:disabled) { background: var(--gold-dark); }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+      padding: 6px 13px;
+      font-size: 12px;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: var(--red-lt);
+    }
+
+    .btn-sm {
+      padding: 6px 13px;
+      font-size: 12px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-outline:hover:not(:disabled) { background: rgba(26,54,96,0.06); }
+
+    /* ─── Alert / Toast ────────────────────────────────────────────────────── */
+    .alert {
+      padding: 11px 14px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      line-height: 1.4;
+    }
+
+    .alert-error   { background: var(--red-lt);   color: var(--red);   border: 1px solid rgba(192,57,43,0.25); }
+    .alert-success { background: var(--green-lt);  color: var(--green); border: 1px solid rgba(26,122,74,0.25); }
+    .alert-info    { background: rgba(155,184,215,0.15); color: var(--navy); border: 1px solid rgba(155,184,215,0.4); }
+
+    /* ─── Toast notification ───────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--navy-dark);
+      color: var(--white);
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 9999;
+      max-width: 340px;
+      pointer-events: none;
+    }
+
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.toast-error  { background: var(--red); }
+    #toast.toast-success { background: var(--green); }
+
+    /* ─── Main App Layout ──────────────────────────────────────────────────── */
+    #app-screen { display: none; min-height: 100vh; flex-direction: column; }
+    #app-screen.visible { display: flex; }
+
+    /* ─── Header ───────────────────────────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0 28px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .header-title span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--powder);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-badge {
+      background: rgba(155,184,215,0.2);
+      color: var(--powder);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logout-btn {
+      background: none;
+      border: 1px solid rgba(155,184,215,0.35);
+      color: var(--powder);
+      padding: 5px 13px;
+      border-radius: 7px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+
+    .logout-btn:hover { background: rgba(155,184,215,0.15); }
+
+    /* ─── Content ───────────────────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    /* ─── Tabs ──────────────────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 2px solid var(--grey-lt);
+      margin-bottom: 28px;
+    }
+
+    .tab {
+      padding: 9px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grey-md);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+
+    .tab:hover { color: var(--navy); }
+
+    .tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--navy);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── Section Cards ─────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--grey-md);
+      margin-top: 2px;
+    }
+
+    /* ─── Form Grid ─────────────────────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-grid .full { grid-column: 1 / -1; }
+
+    .form-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .form-row .field { flex: 1; margin-bottom: 0; }
+
+    /* ─── Stats Row ─────────────────────────────────────────────────────────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--grey-md);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .stat-value.gold { color: var(--gold-dark); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.red { color: var(--red); }
+
+    /* ─── Table ─────────────────────────────────────────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--grey-lt);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: var(--bg);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--grey-md);
+      border-bottom: 1px solid var(--grey-lt);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--grey-lt);
+      color: var(--grey-dk);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover td { background: rgba(26,54,96,0.025); }
+
+    .code-cell {
+      font-family: 'SF Mono', 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── Badges ────────────────────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .badge-active    { background: var(--green-lt);            color: var(--green); }
+    .badge-inactive  { background: rgba(192,57,43,0.1);        color: var(--red);   }
+    .badge-essential { background: rgba(26,54,96,0.08);        color: var(--navy);  }
+    .badge-premium   { background: rgba(201,168,76,0.15);      color: var(--gold-dark); }
+    .badge-sponsored { background: rgba(155,184,215,0.25);     color: #2a6090;      }
+
+    /* ─── Usage Bar ─────────────────────────────────────────────────────────── */
+    .usage-bar {
+      height: 6px;
+      background: var(--grey-lt);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
+      min-width: 80px;
+    }
+
+    .usage-bar-fill {
+      height: 100%;
+      background: var(--navy);
+      border-radius: 3px;
+      transition: width 0.4s;
+    }
+
+    .usage-bar-fill.full { background: var(--red); }
+    .usage-bar-fill.near { background: var(--gold-dark); }
+
+    /* ─── Empty State ────────────────────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--grey-md);
+    }
+
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p { font-size: 14px; }
+
+    /* ─── Loading ────────────────────────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.4);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+    }
+
+    .spinner-navy {
+      border-color: rgba(26,54,96,0.2);
+      border-top-color: var(--navy);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-row td {
+      text-align: center;
+      padding: 32px !important;
+      color: var(--grey-md);
+    }
+
+    /* ─── Copy Button ────────────────────────────────────────────────────────── */
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--grey-md);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+      transition: color 0.15s, background 0.15s;
+      vertical-align: middle;
+    }
+
+    .copy-btn:hover { color: var(--navy); background: var(--grey-lt); }
+
+    /* ─── Confirm overlay ────────────────────────────────────────────────────── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,37,72,0.55);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .overlay.visible { display: flex; }
+
+    .dialog {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px 28px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+
+    .dialog h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .dialog p  { color: var(--grey-md); font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+
+    .dialog-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 0 16px; }
+      main   { padding: 20px 14px 40px; }
+      .card  { padding: 20px 16px; }
+      .header-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     AUTH SCREEN
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <!-- Feather icon matching app brand -->
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+        <rect width="38" height="38" rx="10" fill="#1A3660"/>
+        <path d="M10 28 C14 22 20 14 28 10 C24 16 22 20 18 26" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M10 28 L18 26" stroke="#9BB8D7" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="28" cy="10" r="2" fill="#C9A84C"/>
+      </svg>
+      <div class="auth-logo-text">
+        RightDesk Reports
+        <span>Admin Portal</span>
+      </div>
+    </div>
+
+    <h1>Admin Sign In</h1>
+    <p>Enter your server token to access the firm code management dashboard.</p>
+
+    <div id="auth-error" class="alert alert-error" style="display:none"></div>
+
+    <div class="field">
+      <label for="token-input">Server Token</label>
+      <input
+        type="password"
+        id="token-input"
+        placeholder="Enter SERVER_TOKEN"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <button class="btn btn-primary" id="sign-in-btn" onclick="handleSignIn()">
+      Sign In
+    </button>
+
+    <p style="margin-top:18px; font-size:11px; color:var(--grey-md); text-align:center;">
+      Token is stored only in session memory and cleared when you close this tab.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     APP SCREEN
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="app-screen">
+
+  <header>
+    <div class="header-brand">
+      <svg width="32" height="32" viewBox="0 0 38 38" fill="none">
+        <rect width="38" height="38" rx="9" fill="rgba(155,184,215,0.2)"/>
+        <path d="M10 28 C14 22 20 14 28 10 C24 16 22 20 18 26" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M10 28 L18 26" stroke="#9BB8D7" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="28" cy="10" r="2.2" fill="#C9A84C"/>
+      </svg>
+      <div class="header-title">
+        RightDesk Reports
+        <span>Admin Dashboard</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="header-badge">Admin</span>
+      <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Stats Row ───────────────────────────────────────────────────────── -->
+    <div class="stats" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Codes</div>
+        <div class="stat-value" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active Codes</div>
+        <div class="stat-value green" id="stat-active">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Deactivated</div>
+        <div class="stat-value red" id="stat-inactive">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Redemptions</div>
+        <div class="stat-value gold" id="stat-redemptions">—</div>
+      </div>
+    </div>
+
+    <!-- ── Tabs ──────────────────────────────────────────────────────────────── -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('codes')">Firm Codes</div>
+      <div class="tab" onclick="switchTab('create')">Create New Code</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         TAB: CODES LIST
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="tab-panel active" id="panel-codes">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">All Firm Codes</div>
+            <div class="card-subtitle">Manage access codes for law firms and partners.</div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="loadCodes()" id="refresh-btn">
+            ↻ Refresh
+          </button>
+        </div>
+
+        <!-- Filter row -->
+        <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
+          <select id="filter-status" onchange="applyFilter()" style="width:auto; min-width:140px;">
+            <option value="all">All Statuses</option>
+            <option value="active">Active only</option>
+            <option value="inactive">Deactivated only</option>
+          </select>
+          <select id="filter-plan" onchange="applyFilter()" style="width:auto; min-width:130px;">
+            <option value="all">All Plans</option>
+            <option value="essential">Essential</option>
+            <option value="premium">Premium</option>
+          </select>
+          <input
+            type="text"
+            id="filter-search"
+            placeholder="Search code or firm name…"
+            oninput="applyFilter()"
+            style="flex:1; min-width:160px;"
+          />
+        </div>
+
+        <div id="list-alert" class="alert" style="display:none"></div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Firm</th>
+                <th>Plan</th>
+                <th>Redemptions</th>
+                <th>Expires</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="codes-tbody">
+              <tr class="loading-row">
+                <td colspan="8">
+                  <span class="spinner spinner-navy"></span>
+                  &nbsp; Loading codes…
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         TAB: CREATE CODE
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-create">
+      <div class="card" style="max-width:680px;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Create New Firm Code</div>
+            <div class="card-subtitle">Generate a unique access code to share with a law firm or partner.</div>
+          </div>
+        </div>
+
+        <div id="create-alert" class="alert" style="display:none"></div>
+        <div id="create-success" style="display:none"></div>
+
+        <form id="create-form" onsubmit="handleCreateCode(event)">
+          <div class="form-grid">
+
+            <div class="field">
+              <label for="firm-name">Firm / Organisation Name *</label>
+              <input type="text" id="firm-name" placeholder="Smith & Associates" required />
+            </div>
+
+            <div class="field">
+              <label for="firm-email">Contact Email *</label>
+              <input type="email" id="firm-email" placeholder="admin@smithlaw.com" required />
+            </div>
+
+            <div class="field">
+              <label for="plan-select">Plan *</label>
+              <select id="plan-select">
+                <option value="essential">Essential</option>
+                <option value="premium">Premium</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="max-redemptions">Max Redemptions</label>
+              <input type="number" id="max-redemptions" value="50" min="1" max="9999" />
+              <div style="font-size:11px; color:var(--grey-md); margin-top:4px;">Number of users who can redeem this code.</div>
+            </div>
+
+            <div class="field">
+              <label for="expires-days">Expires After (days)</label>
+              <input type="number" id="expires-days" value="365" min="0" max="3650" />
+              <div style="font-size:11px; color:var(--grey-md); margin-top:4px;">Set to 0 for codes that never expire.</div>
+            </div>
+
+            <div class="field">
+              <label for="custom-code">Custom Code (optional)</label>
+              <input
+                type="text"
+                id="custom-code"
+                placeholder="e.g. SMITHLAW2025"
+                maxlength="20"
+                style="text-transform:uppercase; letter-spacing:0.06em; font-weight:600;"
+                oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
+              />
+              <div style="font-size:11px; color:var(--grey-md); margin-top:4px;">Leave blank to auto-generate from firm name.</div>
+            </div>
+
+          </div>
+
+          <div style="margin-top:8px; display:flex; gap:12px; align-items:center;">
+            <button type="submit" class="btn btn-gold" id="create-btn">
+              Create Code
+            </button>
+            <button type="button" class="btn btn-outline" onclick="resetCreateForm()">
+              Clear
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tips -->
+      <div class="card" style="max-width:680px; background: rgba(26,54,96,0.03); box-shadow:none; border: 1px solid var(--grey-lt);">
+        <div class="card-title" style="font-size:13px; margin-bottom:10px;">Quick Tips</div>
+        <ul style="padding-left:18px; color:var(--grey-md); font-size:13px; line-height:2;">
+          <li>Codes are redeemable in-app on the pricing screen ("Have an access code from your attorney?")</li>
+          <li>Expiry controls when users can <em>redeem</em> the code — not when their access ends</li>
+          <li>Once deactivated, a code cannot be re-activated</li>
+          <li>Custom codes are automatically uppercased and stripped of special characters</li>
+          <li>Set Max Redemptions to a large number (e.g. 9999) for effectively unlimited use</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DEACTIVATE CONFIRMATION DIALOG
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="overlay" id="confirm-overlay">
+  <div class="dialog">
+    <h3>Deactivate Code?</h3>
+    <p id="confirm-text">This code will no longer be redeemable by users. This action cannot be undone.</p>
+    <div class="dialog-actions">
+      <button class="btn btn-outline" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-danger" id="confirm-yes-btn" onclick="confirmDeactivate()">
+        Deactivate
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     TOAST
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════════════════════ -->
+<script>
+  'use strict';
+
+  // ─── Config ──────────────────────────────────────────────────────────────────
+  const API_BASE = 'https://right-desk-reports-backend-production.up.railway.app';
+
+  // ─── Session State ────────────────────────────────────────────────────────────
+  // Token is NEVER persisted to localStorage — sessionStorage only, cleared on tab close.
+  let _token    = sessionStorage.getItem('rdr_admin_token') || '';
+  let _allCodes = [];   // raw array from last successful /admin/firm-codes fetch
+  let _pendingDeactivateCode = null;
+
+  // ─── Startup ──────────────────────────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', () => {
+    if (_token) {
+      showApp();
+      loadCodes();
+    }
+
+    // Enter key on token field
+    document.getElementById('token-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSignIn();
+    });
+  });
+
+  // ─── Auth ─────────────────────────────────────────────────────────────────────
+  async function handleSignIn() {
+    const input = document.getElementById('token-input');
+    const token = input.value.trim();
+    const errEl = document.getElementById('auth-error');
+    const btn   = document.getElementById('sign-in-btn');
+
+    if (!token) {
+      showAuthError('Please enter your server token.');
+      return;
+    }
+
+    // Verify token by calling a lightweight authenticated endpoint
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Verifying…';
+    errEl.style.display = 'none';
+
+    try {
+      const resp = await apiGet('/admin/firm-codes', token);
+      if (resp.ok) {
+        _token = token;
+        sessionStorage.setItem('rdr_admin_token', token);
+        const data = await resp.json();
+        showApp();
+        processCodesData(data);
+      } else if (resp.status === 403 || resp.status === 401) {
+        showAuthError('Invalid token. Please check your SERVER_TOKEN and try again.');
+      } else {
+        showAuthError(`Server returned ${resp.status}. Please try again.`);
+      }
+    } catch (err) {
+      showAuthError('Could not reach the server. Check your connection and try again.');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Sign In';
+  }
+
+  function showAuthError(msg) {
+    const el = document.getElementById('auth-error');
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'flex';
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem('rdr_admin_token');
+    _token = '';
+    _allCodes = [];
+    document.getElementById('token-input').value = '';
+    document.getElementById('auth-screen').style.display = 'flex';
+    document.getElementById('app-screen').classList.remove('visible');
+  }
+
+  function showApp() {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app-screen').classList.add('visible');
+  }
+
+  // ─── API Helpers ──────────────────────────────────────────────────────────────
+  function apiHeaders(token) {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token || _token}`,
+    };
+  }
+
+  function apiGet(path, token) {
+    return fetch(API_BASE + path, { method: 'GET', headers: apiHeaders(token) });
+  }
+
+  function apiPost(path, body) {
+    return fetch(API_BASE + path, {
+      method:  'POST',
+      headers: apiHeaders(),
+      body:    JSON.stringify(body),
+    });
+  }
+
+  function apiPatch(path) {
+    return fetch(API_BASE + path, { method: 'PATCH', headers: apiHeaders() });
+  }
+
+  // ─── Tabs ─────────────────────────────────────────────────────────────────────
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      const panels = ['codes', 'create'];
+      t.classList.toggle('active', panels[i] === name);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === `panel-${name}`);
+    });
+  }
+
+  // ─── Load Codes ───────────────────────────────────────────────────────────────
+  async function loadCodes() {
+    const tbody  = document.getElementById('codes-tbody');
+    const refBtn = document.getElementById('refresh-btn');
+
+    tbody.innerHTML = `
+      <tr class="loading-row">
+        <td colspan="8">
+          <span class="spinner spinner-navy"></span>&nbsp; Loading codes…
+        </td>
+      </tr>`;
+    refBtn.disabled = true;
+    refBtn.textContent = '↻ Loading…';
+
+    try {
+      const resp = await apiGet('/admin/firm-codes');
+      if (!resp.ok) {
+        if (resp.status === 401 || resp.status === 403) {
+          showListAlert('Session expired or invalid token. Please sign out and sign back in.', 'error');
+        } else {
+          showListAlert(`Failed to load codes (${resp.status}). Please refresh.`, 'error');
+        }
+        tbody.innerHTML = '';
+        return;
+      }
+      const data = await resp.json();
+      processCodesData(data);
+    } catch (err) {
+      showListAlert('Network error. Please check your connection and refresh.', 'error');
+      tbody.innerHTML = '';
+    } finally {
+      refBtn.disabled = false;
+      refBtn.textContent = '↻ Refresh';
+    }
+  }
+
+  function processCodesData(data) {
+    _allCodes = (data.codes || []).sort((a, b) => {
+      // Active first, then by created_at desc
+      if (a.is_active !== b.is_active) return b.is_active ? 1 : -1;
+      return (b.created_at || '').localeCompare(a.created_at || '');
+    });
+    updateStats(_allCodes);
+    applyFilter();
+  }
+
+  function updateStats(codes) {
+    const total       = codes.length;
+    const active      = codes.filter(c => c.is_active).length;
+    const inactive    = codes.filter(c => !c.is_active).length;
+    const redemptions = codes.reduce((s, c) => s + (c.redemption_count || 0), 0);
+
+    document.getElementById('stat-total').textContent       = total;
+    document.getElementById('stat-active').textContent      = active;
+    document.getElementById('stat-inactive').textContent    = inactive;
+    document.getElementById('stat-redemptions').textContent = redemptions;
+  }
+
+  function applyFilter() {
+    const status = document.getElementById('filter-status').value;
+    const plan   = document.getElementById('filter-plan').value;
+    const search = document.getElementById('filter-search').value.trim().toLowerCase();
+
+    const filtered = _allCodes.filter(c => {
+      if (status === 'active'   && !c.is_active)  return false;
+      if (status === 'inactive' &&  c.is_active)  return false;
+      if (plan !== 'all' && c.plan !== plan)       return false;
+      if (search) {
+        const hay = `${c.code} ${c.firm_name} ${c.firm_email}`.toLowerCase();
+        if (!hay.includes(search)) return false;
+      }
+      return true;
+    });
+
+    renderTable(filtered);
+  }
+
+  function renderTable(codes) {
+    const tbody = document.getElementById('codes-tbody');
+    document.getElementById('list-alert').style.display = 'none';
+
+    if (codes.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8">
+            <div class="empty-state">
+              <div class="empty-icon">📋</div>
+              <p>${_allCodes.length === 0 ? 'No firm codes yet. Create your first one using the "Create New Code" tab.' : 'No codes match your current filters.'}</p>
+            </div>
+          </td>
+        </tr>`;
+      return;
+    }
+
+    tbody.innerHTML = codes.map(c => {
+      const pct       = c.max_redemptions > 0
+        ? Math.min(100, Math.round((c.redemption_count / c.max_redemptions) * 100))
+        : 0;
+      const barClass  = pct >= 100 ? 'full' : pct >= 80 ? 'near' : '';
+      const expiresStr = formatExpiry(c.expires_at);
+      const createdStr = formatDate(c.created_at);
+      const planBadge  = `<span class="badge badge-${c.plan}">${c.plan}</span>`;
+      const statusBadge = c.is_active
+        ? '<span class="badge badge-active">Active</span>'
+        : '<span class="badge badge-inactive">Deactivated</span>';
+      const deactivateBtn = c.is_active
+        ? `<button class="btn btn-danger" onclick="promptDeactivate('${c.code}', '${escapeHtml(c.firm_name)}')">Deactivate</button>`
+        : `<span style="color:var(--grey-md); font-size:12px;">—</span>`;
+
+      return `
+        <tr>
+          <td>
+            <span class="code-cell">${c.code || '—'}</span>
+            <button class="copy-btn" title="Copy code" onclick="copyText('${c.code}')">⎘</button>
+          </td>
+          <td>
+            <div style="font-weight:600;">${escapeHtml(c.firm_name || '—')}</div>
+            <div style="font-size:11px; color:var(--grey-md);">${escapeHtml(c.firm_email || '')}</div>
+          </td>
+          <td>${planBadge}</td>
+          <td>
+            <div style="font-size:13px;">${c.redemption_count || 0} / ${c.max_redemptions || '∞'}</div>
+            ${c.max_redemptions > 0 ? `
+              <div class="usage-bar">
+                <div class="usage-bar-fill ${barClass}" style="width:${pct}%"></div>
+              </div>` : ''}
+          </td>
+          <td style="white-space:nowrap; font-size:12px; color:var(--grey-md);">${expiresStr}</td>
+          <td>${statusBadge}</td>
+          <td style="white-space:nowrap; font-size:11px; color:var(--grey-md);">${createdStr}</td>
+          <td style="white-space:nowrap;">${deactivateBtn}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  // ─── Create Code ──────────────────────────────────────────────────────────────
+  async function handleCreateCode(e) {
+    e.preventDefault();
+
+    const firmName  = document.getElementById('firm-name').value.trim();
+    const firmEmail = document.getElementById('firm-email').value.trim();
+    const plan      = document.getElementById('plan-select').value;
+    const maxRed    = parseInt(document.getElementById('max-redemptions').value) || 50;
+    const expDays   = parseInt(document.getElementById('expires-days').value) || 0;
+    const custom    = document.getElementById('custom-code').value.trim();
+
+    const btn = document.getElementById('create-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Creating…';
+    document.getElementById('create-alert').style.display = 'none';
+    document.getElementById('create-success').style.display = 'none';
+
+    try {
+      const resp = await apiPost('/admin/create-firm-code', {
+        firm_name:       firmName,
+        firm_email:      firmEmail,
+        plan:            plan,
+        max_redemptions: maxRed,
+        expires_days:    expDays,
+        custom_code:     custom,
+      });
+
+      const data = await resp.json();
+
+      if (resp.ok) {
+        showCreateSuccess(data);
+        showToast(`Code "${data.code}" created successfully!`, 'success');
+        // Reload the codes list in background so stats update
+        loadCodes();
+      } else if (resp.status === 409) {
+        showCreateAlert(`Code "${custom}" already exists. Try a different custom code or leave it blank.`, 'error');
+      } else {
+        showCreateAlert(data.detail || `Server error (${resp.status}). Please try again.`, 'error');
+      }
+    } catch (err) {
+      showCreateAlert('Network error. Please check your connection and try again.', 'error');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Create Code';
+  }
+
+  function showCreateSuccess(data) {
+    const el = document.getElementById('create-success');
+    const expStr = data.expires_at === 'never' ? 'Never expires' : `Expires ${data.expires_at}`;
+    el.innerHTML = `
+      <div class="alert alert-success" style="margin-bottom:20px; flex-direction:column; align-items:flex-start; gap:12px;">
+        <div style="display:flex; align-items:center; gap:8px; font-weight:700;">
+          ✓ Code created successfully!
+        </div>
+        <div style="background:rgba(26,122,74,0.08); border-radius:8px; padding:14px 16px; width:100%;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+            <span style="font-family:monospace; font-size:20px; font-weight:800; letter-spacing:0.1em; color:#1A3660;">${data.code}</span>
+            <button class="copy-btn" onclick="copyText('${data.code}')" title="Copy code" style="font-size:16px;">⎘</button>
+          </div>
+          <div style="font-size:12px; color:var(--grey-md); line-height:1.8;">
+            <strong>Firm:</strong> ${escapeHtml(data.firm_name)}<br>
+            <strong>Plan:</strong> ${capitalize(data.plan)}<br>
+            <strong>Max Redemptions:</strong> ${data.max_redemptions}<br>
+            <strong>Expiry:</strong> ${expStr}
+          </div>
+        </div>
+        <div style="font-size:12px; color:#1a7a4a;">
+          Share this code with ${escapeHtml(data.firm_name)}. Users enter it in the app under Pricing → "Have an access code from your attorney?"
+        </div>
+      </div>`;
+    el.style.display = 'block';
+    document.getElementById('create-form').reset();
+  }
+
+  function showCreateAlert(msg, type) {
+    const el = document.getElementById('create-alert');
+    el.className = `alert alert-${type === 'error' ? 'error' : 'success'}`;
+    el.textContent = msg;
+    el.style.display = 'flex';
+  }
+
+  function resetCreateForm() {
+    document.getElementById('create-form').reset();
+    document.getElementById('create-alert').style.display = 'none';
+    document.getElementById('create-success').style.display = 'none';
+  }
+
+  // ─── Deactivate ───────────────────────────────────────────────────────────────
+  function promptDeactivate(code, firmName) {
+    _pendingDeactivateCode = code;
+    document.getElementById('confirm-text').textContent =
+      `Deactivate code "${code}" for ${firmName}? ` +
+      `Users will no longer be able to redeem it. This cannot be undone.`;
+    document.getElementById('confirm-overlay').classList.add('visible');
+  }
+
+  function closeConfirm() {
+    _pendingDeactivateCode = null;
+    document.getElementById('confirm-overlay').classList.remove('visible');
+  }
+
+  async function confirmDeactivate() {
+    const code = _pendingDeactivateCode;
+    if (!code) return;
+
+    const btn = document.getElementById('confirm-yes-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>';
+
+    try {
+      const resp = await apiPatch(`/admin/deactivate-firm-code/${encodeURIComponent(code)}`);
+      if (resp.ok) {
+        showToast(`Code "${code}" deactivated.`, 'success');
+        closeConfirm();
+        loadCodes();
+      } else {
+        const data = await resp.json().catch(() => ({}));
+        showToast(data.detail || `Failed to deactivate (${resp.status}).`, 'error');
+        closeConfirm();
+      }
+    } catch (err) {
+      showToast('Network error. Please try again.', 'error');
+      closeConfirm();
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Deactivate';
+  }
+
+  // Close overlay on backdrop click
+  document.getElementById('confirm-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeConfirm();
+  });
+
+  // ─── Toast ────────────────────────────────────────────────────────────────────
+  let _toastTimer = null;
+
+  function showToast(msg, type) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `show ${type === 'error' ? 'toast-error' : type === 'success' ? 'toast-success' : ''}`;
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => { el.className = ''; }, 3500);
+  }
+
+  // ─── Helpers ──────────────────────────────────────────────────────────────────
+  function showListAlert(msg, type) {
+    const el = document.getElementById('list-alert');
+    el.className = `alert alert-${type}`;
+    el.textContent = msg;
+    el.style.display = 'flex';
+  }
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(`"${text}" copied to clipboard.`, 'success');
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast(`"${text}" copied.`, 'success');
+    });
+  }
+
+  function formatDate(isoStr) {
+    if (!isoStr || isoStr === 'null') return '—';
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d)) return '—';
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch { return '—'; }
+  }
+
+  function formatExpiry(val) {
+    if (!val || val === 'never' || val === 'null' || val === 'None') return 'Never';
+    return formatDate(val);
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function capitalize(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+</script>
+</body>
+</html>
