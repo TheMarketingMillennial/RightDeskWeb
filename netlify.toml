@@ -7,6 +7,10 @@
   # No framework build command needed for static HTML
   command   = ""
   publish   = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
 
 # ── Redirects ──────────────────────────────────────────────
 # Trailing-slash canonicalization (avoids duplicate content)
@@ -95,7 +99,7 @@
   to     = "/knowledge-center/documentation-mistakes-employees-make/"
   status = 301
 
-# ── Security Headers ───────────────────────────────────────
+# ── Security Headers (site-wide) ───────────────────────────
 [[headers]]
   for = "/*"
   [headers.values]
@@ -103,6 +107,26 @@
     X-XSS-Protection       = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# ── Admin page — hardened headers ──────────────────────────
+# No caching, no indexing, tight CSP (no inline scripts allowed
+# from external origins; all API calls go to same-origin functions)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection       = "1; mode=block"
+    Referrer-Policy        = "no-referrer"
+    Cache-Control          = "no-store, no-cache, must-revalidate"
+    X-Robots-Tag           = "noindex, nofollow"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
+
+# ── Netlify Functions — no caching ─────────────────────────
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate"
 
 # ── Cache static assets ────────────────────────────────────
 [[headers]]

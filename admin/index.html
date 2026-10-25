@@ -610,17 +610,17 @@
     </div>
 
     <h1>Admin Sign In</h1>
-    <p>Enter your server token to access the firm code management dashboard.</p>
+    <p>Enter your admin password to access the firm code management dashboard.</p>
 
     <div id="auth-error" class="alert alert-error" style="display:none"></div>
 
     <div class="field">
-      <label for="token-input">Server Token</label>
+      <label for="token-input">Admin Password</label>
       <input
         type="password"
         id="token-input"
-        placeholder="Enter SERVER_TOKEN"
-        autocomplete="off"
+        placeholder="Enter admin password"
+        autocomplete="current-password"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
@@ -632,7 +632,7 @@
     </button>
 
     <p style="margin-top:18px; font-size:11px; color:var(--grey-md); text-align:center;">
-      Token is stored only in session memory and cleared when you close this tab.
+      Your session is managed server-side. No credentials are stored in the browser.
     </p>
   </div>
 </div>
@@ -867,63 +867,95 @@
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
      JAVASCRIPT
+     ─────────────────────────────────────────────────────────────────────────
+     SECURITY NOTE: SERVER_TOKEN never appears here or anywhere in this file.
+     All admin API calls go through /.netlify/functions/admin-proxy, which
+     holds SERVER_TOKEN exclusively in server-side process memory (Netlify
+     environment variable). Authentication uses an HttpOnly signed cookie
+     issued by /.netlify/functions/admin-auth — the browser cannot read it.
 ════════════════════════════════════════════════════════════════════════════ -->
 <script>
   'use strict';
 
-  // ─── Config ──────────────────────────────────────────────────────────────────
-  const API_BASE = 'https://right-desk-reports-backend-production.up.railway.app';
-
-  // ─── Session State ────────────────────────────────────────────────────────────
-  // Token is NEVER persisted to localStorage — sessionStorage only, cleared on tab close.
-  let _token    = sessionStorage.getItem('rdr_admin_token') || '';
-  let _allCodes = [];   // raw array from last successful /admin/firm-codes fetch
+  // ─── State ────────────────────────────────────────────────────────────────────
+  // No token. No sessionStorage. Auth state is the HttpOnly cookie — the browser
+  // cannot read, modify, or exfiltrate it. _sessionActive is a UI hint only.
+  let _sessionActive = false;
+  let _allCodes      = [];
   let _pendingDeactivateCode = null;
 
   // ─── Startup ──────────────────────────────────────────────────────────────────
   window.addEventListener('DOMContentLoaded', () => {
-    if (_token) {
-      showApp();
-      loadCodes();
-    }
+    // Probe the proxy with a lightweight call. If the HttpOnly session cookie
+    // is still valid the server returns 200 and we skip the login screen.
+    probeSession();
 
-    // Enter key on token field
     document.getElementById('token-input').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handleSignIn();
     });
   });
 
+  /**
+   * Check whether an existing session cookie is still valid by attempting
+   * a real data fetch. Avoids a dedicated /ping endpoint.
+   */
+  async function probeSession() {
+    try {
+      const resp = await apiGet('/admin/firm-codes');
+      if (resp.ok) {
+        const data = await resp.json();
+        _sessionActive = true;
+        showApp();
+        processCodesData(data);
+      }
+      // 401 → no cookie / expired → stay on login screen (default)
+    } catch (_) {
+      // Network error on probe — just show login screen
+    }
+  }
+
   // ─── Auth ─────────────────────────────────────────────────────────────────────
+
   async function handleSignIn() {
     const input = document.getElementById('token-input');
-    const token = input.value.trim();
+    const password = input.value.trim();
     const errEl = document.getElementById('auth-error');
     const btn   = document.getElementById('sign-in-btn');
 
-    if (!token) {
-      showAuthError('Please enter your server token.');
+    if (!password) {
+      showAuthError('Please enter your admin password.');
       return;
     }
 
-    // Verify token by calling a lightweight authenticated endpoint
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Verifying…';
+    btn.innerHTML = '<span class="spinner"></span> Signing in…';
     errEl.style.display = 'none';
 
     try {
-      const resp = await apiGet('/admin/firm-codes', token);
-      if (resp.ok) {
-        _token = token;
-        sessionStorage.setItem('rdr_admin_token', token);
-        const data = await resp.json();
+      // POST password to server-side function. On success, the function sets
+      // an HttpOnly Secure SameSite=Strict signed cookie — invisible to JS.
+      const resp = await fetch('/.netlify/functions/admin-auth', {
+        method:      'POST',
+        credentials: 'same-origin',   // include cookies on subsequent requests
+        headers:     { 'Content-Type': 'application/json' },
+        body:        JSON.stringify({ password }),
+      });
+
+      const data = await resp.json().catch(() => ({}));
+
+      if (resp.ok && data.ok) {
+        _sessionActive = true;
+        input.value = '';
         showApp();
-        processCodesData(data);
-      } else if (resp.status === 403 || resp.status === 401) {
-        showAuthError('Invalid token. Please check your SERVER_TOKEN and try again.');
+        loadCodes();
+      } else if (resp.status === 401) {
+        showAuthError('Incorrect password. Please try again.');
+      } else if (resp.status === 500) {
+        showAuthError('Server configuration error. Contact the site administrator.');
       } else {
-        showAuthError(`Server returned ${resp.status}. Please try again.`);
+        showAuthError(data.error || `Sign-in failed (${resp.status}). Please try again.`);
       }
-    } catch (err) {
+    } catch (_) {
       showAuthError('Could not reach the server. Check your connection and try again.');
     }
 
@@ -937,9 +969,18 @@
     el.style.display = 'flex';
   }
 
-  function handleLogout() {
-    sessionStorage.removeItem('rdr_admin_token');
-    _token = '';
+  async function handleLogout() {
+    // Tell the server to clear the HttpOnly cookie
+    try {
+      await fetch('/.netlify/functions/admin-auth', {
+        method:      'POST',
+        credentials: 'same-origin',
+        headers:     { 'Content-Type': 'application/json' },
+        body:        JSON.stringify({ action: 'logout' }),
+      });
+    } catch (_) { /* ignore — cookie will expire naturally */ }
+
+    _sessionActive = false;
     _allCodes = [];
     document.getElementById('token-input').value = '';
     document.getElementById('auth-screen').style.display = 'flex';
@@ -952,27 +993,36 @@
   }
 
   // ─── API Helpers ──────────────────────────────────────────────────────────────
-  function apiHeaders(token) {
-    return {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token || _token}`,
-    };
-  }
+  // All calls go to the Netlify proxy function, which:
+  //   1. Verifies the HttpOnly session cookie server-side
+  //   2. Injects SERVER_TOKEN (from Netlify env var) into the Railway request
+  //   3. Returns Railway's response unchanged
+  // SERVER_TOKEN is never in this file or anywhere accessible to the browser.
 
-  function apiGet(path, token) {
-    return fetch(API_BASE + path, { method: 'GET', headers: apiHeaders(token) });
+  function apiGet(path) {
+    return fetch(
+      `/.netlify/functions/admin-proxy?path=${encodeURIComponent(path)}`,
+      { method: 'GET', credentials: 'same-origin' }
+    );
   }
 
   function apiPost(path, body) {
-    return fetch(API_BASE + path, {
-      method:  'POST',
-      headers: apiHeaders(),
-      body:    JSON.stringify(body),
-    });
+    return fetch(
+      `/.netlify/functions/admin-proxy?path=${encodeURIComponent(path)}`,
+      {
+        method:      'POST',
+        credentials: 'same-origin',
+        headers:     { 'Content-Type': 'application/json' },
+        body:        JSON.stringify(body),
+      }
+    );
   }
 
   function apiPatch(path) {
-    return fetch(API_BASE + path, { method: 'PATCH', headers: apiHeaders() });
+    return fetch(
+      `/.netlify/functions/admin-proxy?path=${encodeURIComponent(path)}`,
+      { method: 'PATCH', credentials: 'same-origin' }
+    );
   }
 
   // ─── Tabs ─────────────────────────────────────────────────────────────────────
