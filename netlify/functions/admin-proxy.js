@@ -2,7 +2,7 @@
  * admin-proxy.js — Netlify Function
  *
  * Secure server-side proxy for all Railway /admin/* endpoints.
- * SERVER_TOKEN is injected here and NEVER sent to the browser.
+ * ADMIN_TOKEN is injected here and NEVER sent to the browser.
  *
  * Routes (all require a valid signed session cookie):
  *   GET  /.netlify/functions/admin-proxy?path=/admin/firm-codes
@@ -10,15 +10,18 @@
  *   PATCH /.netlify/functions/admin-proxy?path=/admin/deactivate-firm-code/CODE
  *
  * Environment variables required (set in Netlify dashboard, never in code):
- *   SERVER_TOKEN         — Bearer token for Railway backend (NEVER sent to browser)
+ *   ADMIN_TOKEN          — Bearer token for Railway /admin/* endpoints (NEVER sent to browser)
  *   ADMIN_SESSION_SECRET — same secret used in admin-auth.js to verify session cookies
  *   RAILWAY_API_BASE     — optional override, defaults to production Railway URL
  *
  * Security guarantees:
  *   1. Every request validates the signed session cookie before touching Railway
- *   2. SERVER_TOKEN only exists in this function's process memory
+ *   2. ADMIN_TOKEN only exists in this function's process memory
  *   3. Allowed paths are whitelisted — arbitrary Railway calls are blocked
  *   4. Only GET / POST / PATCH are forwarded; all others are rejected
+ *
+ * SECURITY NOTE: ADMIN_TOKEN is separate from (and replaces) the old SERVER_TOKEN.
+ * ADMIN_TOKEN protects only /admin/* endpoints and is never shipped in client apps.
  */
 
 const crypto = require('crypto');
@@ -100,7 +103,7 @@ function isAllowedPath(path) {
 }
 
 // ── Upstream HTTP request ─────────────────────────────────────────────────────
-function upstreamRequest(method, url, serverToken, bodyStr) {
+function upstreamRequest(method, url, adminToken, bodyStr) {
   return new Promise((resolve, reject) => {
     const parsed  = new URL(url);
     const isHttps = parsed.protocol === 'https:';
@@ -112,7 +115,7 @@ function upstreamRequest(method, url, serverToken, bodyStr) {
       path:     parsed.pathname + parsed.search,
       method,
       headers: {
-        'Authorization': `Bearer ${serverToken}`,
+        'Authorization': `Bearer ${adminToken}`,
         'Content-Type':  'application/json',
         'Accept':        'application/json',
         ...(bodyStr ? { 'Content-Length': Buffer.byteLength(bodyStr) } : {}),
@@ -149,11 +152,11 @@ function json(statusCode, body) {
 exports.handler = async (event) => {
 
   // ── 0. Validate env vars ──────────────────────────────────────────────────
-  const serverToken   = process.env.SERVER_TOKEN;
+  const adminToken    = process.env.ADMIN_TOKEN;
   const sessionSecret = process.env.ADMIN_SESSION_SECRET;
 
-  if (!serverToken || !sessionSecret) {
-    console.error('admin-proxy: SERVER_TOKEN or ADMIN_SESSION_SECRET not configured');
+  if (!adminToken || !sessionSecret) {
+    console.error('admin-proxy: ADMIN_TOKEN or ADMIN_SESSION_SECRET not configured');
     return json(500, { error: 'Server configuration error.' });
   }
 
@@ -183,7 +186,7 @@ exports.handler = async (event) => {
   const bodyStr     = (method === 'POST' && event.body) ? event.body : null;
 
   try {
-    const upstream = await upstreamRequest(method, upstreamUrl, serverToken, bodyStr);
+    const upstream = await upstreamRequest(method, upstreamUrl, adminToken, bodyStr);
 
     // Pass Railway's status and body through unchanged so the browser gets
     // the same structured errors (409 conflict, 404 not found, etc.)
