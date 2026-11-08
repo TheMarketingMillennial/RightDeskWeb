@@ -106,6 +106,9 @@
     attorneyForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var submitBtn = attorneyForm.querySelector('.form-submit');
+      var originalLabel = submitBtn.textContent;
+      var errBox = document.getElementById('attorney-form-error');
+      if (errBox) errBox.style.display = 'none';
       submitBtn.textContent = 'Submitting…';
       submitBtn.disabled = true;
 
@@ -114,8 +117,15 @@
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(attorneyForm)).toString(),
       })
-        .then(function () { showAttorneySuccess(); })
-        .catch(function () { showAttorneySuccess(); });
+        .then(function (res) {
+          if (!res.ok) { throw new Error('HTTP ' + res.status); }
+          showAttorneySuccess();
+        })
+        .catch(function () {
+          submitBtn.textContent = originalLabel;
+          submitBtn.disabled = false;
+          if (errBox) errBox.style.display = 'block';
+        });
     });
   }
 
