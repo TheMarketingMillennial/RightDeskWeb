@@ -175,13 +175,13 @@
   overlay.innerHTML =
     '<div class="ios-modal" role="dialog" aria-modal="true" aria-labelledby="ios-modal-title">' +
       '<button type="button" class="ios-modal-x" aria-label="Close">&times;</button>' +
-      '<h2 id="ios-modal-title">Right Desk Reports on iPhone &amp; iPad</h2>' +
-      '<p class="ios-modal-lead">There is no App Store download. On Apple devices, Right Desk Reports works as a web app that you save to your Home Screen. It opens full screen, just like an app.</p>' +
+      '<h2 id="ios-modal-title">RightDesk Reports on iPhone &amp; iPad</h2>' +
+      '<p class="ios-modal-lead">There is no App Store download. On Apple devices, RightDesk Reports works as a web app that you save to your Home Screen. It opens full screen, just like an app.</p>' +
       '<ol class="ios-modal-steps">' +
         '<li>Open the web app below <strong>in Safari</strong>.</li>' +
         '<li>Tap the <strong>Share</strong> button (the square with an arrow pointing up).</li>' +
         '<li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>' +
-        '<li>Tap <strong>Add</strong>. The Right Desk Reports icon now appears on your Home Screen.</li>' +
+        '<li>Tap <strong>Add</strong>. The RightDesk Reports icon now appears on your Home Screen.</li>' +
       '</ol>' +
       '<p class="ios-modal-note">The first time you open it, you will see the sign-in screen. Create your free account there.</p>' +
       '<div class="ios-modal-actions">' +
