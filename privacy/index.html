@@ -22,7 +22,7 @@
   <style>
     .policy-page{max-width:760px;margin:0 auto;padding:80px 24px 120px}
     .policy-page h1{font-size:30px;font-weight:800;color:var(--navy);margin-bottom:6px}
-    .policy-meta{font-size:13px;color:var(--grey);margin-bottom:24px}
+    .policy-meta{font-size:13px;color:var(--dark-grey);font-weight:600;margin-bottom:24px}
     .policy-page h2{font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin:34px 0 10px}
     .policy-page h3{font-size:14px;font-weight:700;color:var(--navy);margin:18px 0 6px}
     .policy-page p,.policy-page li{font-size:14.5px;color:var(--dark-grey);line-height:1.75}
@@ -60,115 +60,293 @@
 
 <!-- CONTENT -->
 <div class="policy-page">
-  <h1>Privacy Policy</h1>
-  <p class="policy-meta">Last updated: November 10, 2026</p>
-
-  <p>RightDesk Reports (&ldquo;RightDesk&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is operated by The Marketing Millennial. This policy explains what information the RightDesk Reports Android app, the web app at app.rightdeskreports.com, and the website at rightdeskreports.com collect, how we use and protect it, and the choices you have. Questions about this policy can go to <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a>.</p>
-
-  <div class="policy-summary">
-    <strong>The short version</strong>
-    <ul>
-      <li>Your incidents, notes, photos and saved reports are stored in your account in Google&rsquo;s cloud (Firebase), not only on your device.</li>
-      <li>Your information is encrypted in transit and at rest, and other users cannot see it. It is not end-to-end encrypted (see section 3).</li>
-      <li>When you ask for a report, the incident details you selected are sent to our server and on to OpenAI, which writes the report text.</li>
-      <li>We do not sell your information, and we do not use it for advertising.</li>
-      <li>You can delete individual records in the app, or ask us to delete your whole account at any time.</li>
-    </ul>
-  </div>
-
-  <h2>1. Information we collect</h2>
-  <h3>Information you give us</h3>
-  <ul>
-    <li><strong>Account details:</strong> your name and email address, and your password (handled by Firebase Authentication; we never see or store your password in readable form). Optional details such as employee ID, department and company name, if you enter them.</li>
-    <li><strong>Incident content:</strong> everything you record about an incident, such as the description, date, time, location, the people involved and their roles, witnesses and any contact details you enter for them, exact words used, policies you believe were violated, the impact on you, whether and to whom you reported it, how HR or management responded, correspondence log entries, and notes.</li>
-    <li><strong>Photos and files:</strong> only the photos or files you choose to attach to an incident.</li>
-    <li><strong>Saved reports:</strong> the report text generated for you, which is saved to your account.</li>
-    <li><strong>Voice dictation:</strong> if you use the microphone to dictate into a form, your device&rsquo;s speech recognition converts it to text. See section 4.</li>
-    <li><strong>Attorney connection requests (optional):</strong> if you ask us to connect you with an attorney, we collect your name, email, optional phone number, ZIP code, type of case, any notes you add, your plan, the report type, your device platform and your preferred contact method.</li>
-    <li><strong>Access codes:</strong> if you redeem a sponsor or firm access code, we record which code you used so your plan can be applied.</li>
-    <li><strong>Messages to us:</strong> anything you send to our support or privacy addresses, and account deletion requests submitted through the website.</li>
-  </ul>
-
-  <h3>Information collected automatically</h3>
-  <ul>
-    <li><strong>Usage analytics:</strong> we use Google Analytics for Firebase (Android) and Google Analytics 4 (web) to count anonymous events such as screens viewed, sign-ups and reports generated. These events do not include your name, email, or any incident content.</li>
-    <li><strong>Aggregate incident statistics:</strong> when you log an incident, we record the category, severity, month, your plan type and your platform. This record does not include any text you wrote and is not linked to your name or email.</li>
-    <li><strong>Technical data:</strong> basic device and app information (such as app version and platform) and server logs needed to run and secure the service. We do not intentionally log the content of your incidents.</li>
-    <li><strong>Website:</strong> our website uses Google Analytics and loads fonts from Google Fonts, which means Google receives your IP address and browser details when you visit. Google Analytics may set cookies in your browser; you can block or clear cookies in your browser settings.</li>
-  </ul>
-
-  <h3>Information we do not collect</h3>
-  <p>We do not collect your precise location, your contacts, or your device advertising ID. We do not read photos on your device other than the ones you attach.</p>
-
-  <h2>2. Payments</h2>
-  <p>Paid plans are purchased through Google Play on Android, or through Stripe on the web. Card and payment details are handled by Google or Stripe; we never receive your full card number. We receive confirmation of your purchase and subscription status, and when you pay through Stripe we send your email address and account ID to Stripe so the payment can be matched to your account.</p>
-
-  <h2>3. Where your information is stored and how it is protected</h2>
-  <ul>
-    <li><strong>Cloud storage:</strong> your account, incidents and saved reports are stored in Google Cloud Firestore, and your attached photos in Firebase Storage, both operated by Google. Data is encrypted in transit and at rest. Security rules limit access so that signed-in users can read and write only their own records.</li>
-    <li><strong>On your device:</strong> the app may keep a copy of some of your data on your device so it loads quickly. Anyone who can unlock your device or sign in to your account may be able to see it, so please protect both.</li>
-    <li><strong>Access by us:</strong> your data is encrypted, but it is not end-to-end encrypted. A small number of authorized people can access the systems that hold it, and we limit that access to what is needed to operate, secure and support the service and to meet legal obligations.</li>
-    <li><strong>Connections:</strong> all communication between the app, our server and our service providers uses HTTPS/TLS.</li>
-  </ul>
-
-  <h2>4. Report writing and other service providers</h2>
-  <p>When you tap to generate a report, the incident details you selected, together with the report type, tone, and any name, employee ID, department, manager and company details you entered, are sent over an encrypted connection to our server, which is hosted on Railway. The server passes them to OpenAI, which writes the report text. The text is returned to your account and saved there.</p>
-  <ul>
-    <li>We do not store your incident content on our server after the report is generated.</li>
-    <li>According to OpenAI&rsquo;s published policy, information sent through its business interface is not used to train its models by default, and may be retained by OpenAI for up to 30 days to monitor for abuse. See <a href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener">openai.com/enterprise-privacy</a>.</li>
-    <li>Generating a report is always your choice. Nothing is sent until you request it.</li>
-    <li>Reports are drafts based on what you entered. Please review them for accuracy before you share them.</li>
-  </ul>
-
-  <p>We use the following service providers to run RightDesk. Each processes information only to provide its service to us:</p>
-  <ul>
-    <li><strong>Google (Firebase, Google Cloud, Google Play, Google Analytics, Google Fonts):</strong> sign-in, database, file storage, purchases, analytics. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy policy</a></li>
-    <li><strong>OpenAI:</strong> writing the report text you request. <a href="https://openai.com/privacy" target="_blank" rel="noopener">Privacy policy</a></li>
-    <li><strong>Railway:</strong> hosting our report server. <a href="https://railway.com/legal/privacy" target="_blank" rel="noopener">Privacy policy</a></li>
-    <li><strong>Stripe:</strong> web payments. <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Privacy policy</a></li>
-    <li><strong>Netlify:</strong> hosting our website and web app and receiving website form submissions (such as deletion requests and attorney partner enquiries). <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Privacy policy</a></li>
-  </ul>
-  <p><strong>Voice dictation.</strong> The microphone is used only when you tap the dictation button. Speech is converted to text by the speech recognition service built into your device (provided by Google on Android, or by Apple on iPhone and iPad), which may process audio on its own servers under its own privacy policy. We do not receive, record or store your audio, only the resulting text that you choose to keep. You can turn off microphone access in your device settings; the app works without it.</p>
-
-  <h2>5. How we use and share your information</h2>
-  <p>We use your information to provide the service you asked for (storing your records, generating your reports, applying your plan), to keep it secure, to answer your requests, to improve how the app works using anonymous statistics, and to meet legal obligations.</p>
-  <ul>
-    <li><strong>We do not sell your personal information</strong> and we do not use it for advertising or profiling.</li>
-    <li><strong>Attorneys:</strong> we share your details with an attorney only if you submit an attorney connection request, and only for the purpose of that request.</li>
-    <li><strong>Sponsor or firm codes:</strong> redeeming a code applies a plan to your account. It does not give the sponsoring organization access to your incidents.</li>
-    <li><strong>Legal:</strong> we may disclose information if required by law, or to protect the rights, safety and security of our users and service.</li>
-    <li><strong>Business changes:</strong> if RightDesk is ever merged with or acquired by another company, we will tell you before your information becomes subject to a different privacy policy.</li>
-  </ul>
-
-  <h2>6. Sensitive information</h2>
-  <p>Incident records can contain sensitive details, such as descriptions of harassment or discrimination and information about other people, including colleagues and managers. You decide what to enter. Please enter other people&rsquo;s contact details only if you are comfortable doing so. We treat this information with care, use it only as described in this policy, and send it to a service provider only when you ask us to generate a report.</p>
-
-  <h2>7. Keeping and deleting your information</h2>
-  <ul>
-    <li><strong>In the app:</strong> you can delete individual incidents and saved reports at any time.</li>
-    <li><strong>Your whole account:</strong> submit the form at <a href="/delete-account/">rightdeskreports.com/delete-account</a>, or email <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a> from the address on your account. We may ask you to confirm your identity first. We aim to complete deletion within 30 days. This removes your account, incidents, saved reports and attached photos.</li>
-    <li><strong>Deleting the app does not delete your account or your cloud data.</strong> You need to request account deletion as described above.</li>
-    <li><strong>What may remain:</strong> information we are legally required or permitted to keep (for example purchase records held by Google or Stripe), copies in routine backups until they expire, and anonymous statistics that cannot be linked to you.</li>
-    <li><strong>Subscriptions:</strong> deleting your account does not cancel a subscription. Please cancel it in Google Play or through your Stripe receipt to avoid future charges.</li>
-  </ul>
-
-  <h2>8. Your rights</h2>
-  <p>Depending on where you live (including the EU/EEA, UK and some US states such as California), you may have the right to access the information we hold about you, correct it, delete it, receive a copy in a portable format, object to or restrict certain uses, and withdraw consent. You can edit your records and export reports as PDF in the app. For anything else, email <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a> and we will respond within 30 days. We will not treat you differently for using these rights. If you are in the EU/EEA or UK and are not satisfied with our response, you may complain to your local data protection authority.</p>
-
-  <h2>9. International transfers</h2>
-  <p>RightDesk and its service providers are based in or operate from the United States, so your information is processed there. By creating an account and using the service you understand that your information will be transferred to and processed in the United States. Where required, transfers rely on the safeguards offered by our providers, such as standard contractual clauses and the EU-US Data Privacy Framework.</p>
-
-  <h2>10. Children</h2>
-  <p>RightDesk is for working adults. We do not knowingly collect information from anyone under 16. If you believe a child has given us information, please contact us and we will delete it.</p>
-
-  <h2>11. Changes to this policy</h2>
-  <p>If we make significant changes, we will tell you in the app or by email, and we will update the date at the top of this page.</p>
-
-  <h2>12. Contact us</h2>
-  <p>Privacy questions and data requests: <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a><br/>
-  Help with your account or the app: <a href="mailto:support@rightdeskreports.com">support@rightdeskreports.com</a><br/>
-  Attorney partnerships: <a href="mailto:attorneys@rightdeskreports.com">attorneys@rightdeskreports.com</a></p>
-  <p>The Marketing Millennial, operator of RightDesk Reports.</p>
+<h1>RightDesk Reports Privacy Policy</h1>
+<p class="policy-meta">Last updated: November 10, 2026</p>
+<p>RightDesk Reports (“RightDesk,” “we,” “us,” or “our”) is operated by The Marketing Millennial.</p>
+<p>This Privacy Policy explains how we collect, use, store, protect, and share information when you use the RightDesk Reports Android application, our web application at <a href="https://app.rightdeskreports.com">https://app.rightdeskreports.com</a>, or our website at <a href="https://rightdeskreports.com">https://rightdeskreports.com</a>.</p>
+<p>We recognize that workplace incidents can involve sensitive personal and professional information. Protecting that information and being transparent about how it is handled are important parts of our service.</p>
+<p>For privacy questions, contact <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a>.</p>
+<div class="policy-summary"><strong>Our Commitment to Your Privacy</strong>
+<ul>
+<li>Your workplace incidents, notes, attachments, and saved reports are stored in your account using Google Firebase cloud services.</li>
+<li>Your information is encrypted during transmission and while stored by our cloud service providers. RightDesk Reports does not currently use end-to-end encryption.</li>
+<li>Other ordinary users cannot access your private incident records through their accounts.</li>
+<li>When you request an AI-generated report, the selected information is securely transmitted to our server and OpenAI for processing.</li>
+<li>We do not sell your workplace incident records, reports, or personal documentation to advertisers, employers, or data brokers.</li>
+<li>We do not use the contents of your workplace incidents to target advertisements.</li>
+<li>You can delete individual records and request deletion of your account and associated information.</li>
+</ul>
+</div>
+<h2>1. Information We Collect</h2>
+<h3>Information You Provide</h3>
+<p><strong>Account information</strong></p>
+<p>When you create an account, we collect your name, email address, and authentication information.</p>
+<p>Authentication is managed through Google Firebase Authentication. We do not receive or store your password in readable form.</p>
+<p>Depending on the information you choose to provide, your account may also contain employment-related details, including your employer's name, department, employee identification number, or other profile information.</p>
+<p><strong>Workplace incident records</strong></p>
+<p>RightDesk Reports allows you to document workplace experiences and maintain an organized record of events.</p>
+<p>Information you voluntarily enter may include:</p>
+<ul>
+<li>Incident descriptions, dates, times, and locations</li>
+<li>Names and roles of individuals involved</li>
+<li>Witness information</li>
+<li>Statements or conversations</li>
+<li>Workplace policies or procedures</li>
+<li>Correspondence with management or human resources</li>
+<li>Actions taken and responses received</li>
+<li>Personal observations and notes</li>
+<li>The impact of an incident</li>
+<li>Follow-up communications and outcomes</li>
+</ul>
+<p>You determine what information to include in your records.</p>
+<p><strong>Photos and attachments</strong></p>
+<p>You may choose to upload photos, screenshots, or supporting files.</p>
+<p>We collect only the attachments you select and submit through the application.</p>
+<p><strong>Saved reports</strong></p>
+<p>When you generate and save a report, the resulting document may be stored in your account for future access.</p>
+<p><strong>Voice dictation</strong></p>
+<p>If you use voice dictation, speech recognition technology converts spoken words into text. The resulting text is handled as part of the information you choose to enter into the application.</p>
+<p><strong>Attorney connection requests</strong></p>
+<p>If you choose to request assistance connecting with an attorney, we may collect your name, contact information, ZIP code, general case category, notes you provide, and preferred method of communication.</p>
+<p>We may also collect relevant request details needed to process your inquiry.</p>
+<p>Submitting an attorney connection request is voluntary.</p>
+<p><strong>Promotional and sponsored access codes</strong></p>
+<p>If you redeem a promotional, sponsored, or firm-provided access code, we record information necessary to validate the code and apply the appropriate account access.</p>
+<p>Redeeming an access code does not automatically give the sponsoring organization access to your incident records, attachments, or saved reports.</p>
+<p><strong>Communications</strong></p>
+<p>We collect information you voluntarily submit when contacting customer support, requesting assistance, asking privacy-related questions, or requesting account deletion.</p>
+<h3>Information Collected Automatically</h3>
+<p><strong>Application and website analytics</strong></p>
+<p>We use Google Analytics for Firebase and Google Analytics 4 to understand how people interact with our services.</p>
+<p>Analytics information may include:</p>
+<ul>
+<li>Website visits and page views</li>
+<li>Application launches and screen views</li>
+<li>General interactions and navigation</li>
+<li>Device and browser information</li>
+<li>Operating system and application version</li>
+<li>General geographic information derived from technical data</li>
+<li>Traffic sources, including advertising campaigns and referring websites</li>
+<li>Account registration events</li>
+<li>Technical performance information</li>
+</ul>
+<p>Analytics services may use cookies, app instance identifiers, device identifiers, and similar technologies to distinguish visits, devices, or interactions.</p>
+<p>Depending on the platform and configuration, advertising-related identifiers may also be processed.</p>
+<p>We do not intentionally include workplace incident descriptions, report contents, witness information, or uploaded documentation in analytics events.</p>
+<p>Analytics information helps us understand service usage, identify technical problems, and evaluate website and marketing performance.</p>
+<p><strong>Technical information</strong></p>
+<p>Our application, website, hosting providers, and security systems may automatically process information such as IP addresses, device information, request timestamps, error messages, and server activity.</p>
+<p>This information helps us maintain functionality, diagnose problems, and protect the service.</p>
+<p>We do not intentionally include the contents of private incident records in technical logs.</p>
+<p><strong>Aggregate incident information</strong></p>
+<p>RightDesk Reports may collect limited structured information about documented incidents for internal analysis.</p>
+<p>This may include incident categories, general severity classifications, reporting periods, account plan types, and application platforms.</p>
+<p>We use this information to better understand workplace trends and improve our services.</p>
+<p>Aggregate reporting is intended to identify broader patterns rather than individual employees or specific incidents.</p>
+<p>We do not include private incident narratives or identifying employee details in reports presented as anonymous or aggregate statistics.</p>
+<h3>Information We Do Not Intentionally Access</h3>
+<p>RightDesk Reports does not require access to your device contacts or continuous precise-location tracking to provide its core documentation features.</p>
+<p>We do not access your entire photo library. Photos and attachments are collected when you choose to provide them.</p>
+<p>Certain third-party services may process device identifiers, IP addresses, or approximate location information as described in this policy.</p>
+<h2>2. Payments and Subscriptions</h2>
+<p>RightDesk Reports offers subscription-based services.</p>
+<p>Payments made through the Android application are processed through Google Play Billing. Payments made through our web application are processed through Stripe.</p>
+<p>Google and Stripe handle payment processing under their respective privacy and security practices.</p>
+<p>We do not receive or store your complete payment card number.</p>
+<p>We may receive information necessary to manage your subscription, including:</p>
+<ul>
+<li>Purchase confirmation</li>
+<li>Subscription status</li>
+<li>Subscription plan</li>
+<li>Transaction or subscription identifiers</li>
+<li>Renewal, cancellation, or expiration status</li>
+<li>Payment-related account identifiers</li>
+</ul>
+<p>For Stripe payments, we may provide your email address and account identifier to associate the transaction with your RightDesk Reports account.</p>
+<p>Payment information is used to provide purchased services, manage subscription access, respond to billing inquiries, and maintain required business records.</p>
+<h2>3. Where Your Information Is Stored and How It Is Protected</h2>
+<h3>Cloud Storage</h3>
+<p>RightDesk Reports uses Google Firebase and Google Cloud services to store and manage account information and application data.</p>
+<p>Workplace incidents and saved reports are stored using Cloud Firestore. Attachments are stored using Firebase Storage.</p>
+<p>These services provide encryption in transit and at rest.</p>
+<p>Application security rules and authentication controls are intended to restrict access to authorized users and prevent ordinary users from viewing records belonging to other accounts.</p>
+<h3>Account Security</h3>
+<p>Your account is protected by the authentication methods available through Firebase Authentication.</p>
+<p>We encourage you to use a strong password, protect access to your email account, and secure the devices you use to access RightDesk Reports.</p>
+<p>Anyone who gains unauthorized access to your account or an unlocked device may be able to view information available within that session.</p>
+<h3>Authorized Administrative Access</h3>
+<p>RightDesk Reports is not an end-to-end encrypted service.</p>
+<p>Although information is encrypted during transmission and storage, authorized personnel with appropriate administrative access may be technically capable of accessing information maintained within our systems.</p>
+<p>We limit administrative access to legitimate operational, security, support, and legal purposes.</p>
+<h3>Information Stored on Your Device</h3>
+<p>The application may temporarily store information or cached data on your device to support functionality and improve performance.</p>
+<p>Protecting your device and account credentials helps reduce the risk of unauthorized access.</p>
+<h3>Security Limitations</h3>
+<p>We use reasonable technical and organizational safeguards designed to protect personal information.</p>
+<p>However, no online service, cloud storage system, or electronic transmission method can guarantee absolute security.</p>
+<p>If we become aware of a security incident affecting personal information, we will evaluate our notification obligations and provide applicable notices as required by law.</p>
+<h2>4. AI-Generated Reports and Third-Party Service Providers</h2>
+<h3>AI Report Generation</h3>
+<p>RightDesk Reports provides an optional feature that helps users organize their documented workplace incidents into written reports.</p>
+<p>When you request an AI-generated report, the information selected for that report is transmitted over an encrypted connection to our application server hosted by Railway.</p>
+<p>Our server then sends the information necessary to generate the report to OpenAI.</p>
+<p>Depending on your selections, this information may include incident descriptions, dates, names, workplace details, correspondence, and other information you entered.</p>
+<p>OpenAI processes the submitted information and returns generated report text.</p>
+<p>The completed report is then returned to RightDesk Reports, where it may be saved to your account.</p>
+<h3>Important Information About AI Processing</h3>
+<ul>
+<li>AI report generation is optional.</li>
+<li>Incident content is submitted to OpenAI when you request report generation, not merely because you created an incident record.</li>
+<li>The information submitted may contain sensitive personal or workplace details.</li>
+<li>AI-generated reports are based on the information you provide and may contain errors or omissions.</li>
+<li>You should review reports for accuracy before sharing or relying on them.</li>
+<li>AI-generated reports do not constitute legal advice or establish that a legal violation occurred.</li>
+</ul>
+<p>RightDesk Reports does not intentionally retain a separate permanent copy of submitted report-generation content on its application server. However, temporary processing, operational logs, and service-provider retention may apply.</p>
+<p>OpenAI states that information submitted through its API is not used to train its models by default, unless the customer opts into data sharing for that purpose. OpenAI may retain certain information for abuse monitoring or service operation according to its applicable policies and API configuration.</p>
+<p>For more information, visit <a href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener">https://openai.com/enterprise-privacy/</a>.</p>
+<h3>Voice Dictation</h3>
+<p>Voice dictation uses speech recognition technology available through your device or browser.</p>
+<p>Depending on your device and settings, audio may be processed by Google, Apple, or another speech recognition provider.</p>
+<p>RightDesk Reports does not intentionally store recordings of your dictated audio as part of its incident documentation service.</p>
+<p>We receive and process the resulting text that you choose to enter or save.</p>
+<p>You can disable microphone permissions through your device settings.</p>
+<h3>Third-Party Providers</h3>
+<p>We rely on service providers to operate RightDesk Reports. Depending on the feature you use, these providers may process information on our behalf or under their own applicable policies.</p>
+<p><strong>Google</strong></p>
+<p>Firebase Authentication, Cloud Firestore, Firebase Storage, Google Cloud, Google Play, Google Analytics, and Google Fonts.</p>
+<p>Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+<p><strong>OpenAI</strong></p>
+<p>Processes information submitted for optional AI-generated reports.</p>
+<p>Privacy Policy: <a href="https://openai.com/privacy" target="_blank" rel="noopener">https://openai.com/privacy</a></p>
+<p><strong>Railway</strong></p>
+<p>Hosts application server infrastructure used to process requests and generate reports.</p>
+<p>Privacy Policy: <a href="https://railway.com/legal/privacy" target="_blank" rel="noopener">https://railway.com/legal/privacy</a></p>
+<p><strong>Stripe</strong></p>
+<p>Processes subscription payments made through supported web payment options.</p>
+<p>Privacy Policy: <a href="https://stripe.com/privacy" target="_blank" rel="noopener">https://stripe.com/privacy</a></p>
+<p><strong>Netlify</strong></p>
+<p>Hosts our marketing website and web application and may process website requests and submitted forms.</p>
+<p>Privacy Policy: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">https://www.netlify.com/privacy/</a></p>
+<h2>5. How We Use and Share Your Information</h2>
+<p>We use collected information to:</p>
+<ul>
+<li>Create and maintain user accounts</li>
+<li>Store and retrieve workplace documentation</li>
+<li>Generate reports when requested</li>
+<li>Manage subscriptions and account access</li>
+<li>Provide customer support</li>
+<li>Maintain and improve application functionality</li>
+<li>Monitor technical performance</li>
+<li>Detect and investigate security problems</li>
+<li>Understand general website and application usage</li>
+<li>Evaluate the effectiveness of marketing campaigns</li>
+<li>Comply with applicable legal obligations</li>
+</ul>
+<h3>Workplace Documentation</h3>
+<p>We do not sell your private workplace incident records, saved reports, attachments, or supporting documentation.</p>
+<p>We do not provide employers with access to an employee's private account simply because the employer is named in a record.</p>
+<p>We do not use the contents of private incident reports to personalize or target advertising.</p>
+<h3>Advertising and Marketing Measurement</h3>
+<p>RightDesk Reports may advertise its services through third-party platforms.</p>
+<p>We may use analytics information and advertising performance measurements to understand how visitors discover our website and interact with our marketing campaigns.</p>
+<p>These activities are separate from the contents of your private workplace incident documentation.</p>
+<p>We do not intentionally disclose incident narratives, report contents, or uploaded evidence to advertising platforms.</p>
+<h3>Attorney Connections</h3>
+<p>If you voluntarily request a connection with an attorney, we may share the contact information and request details necessary to facilitate that connection.</p>
+<p>We do not automatically disclose your entire incident history or saved reports as part of an attorney connection request.</p>
+<p>Any additional sharing of documentation should occur through an authorized action or request.</p>
+<h3>Sponsored Access</h3>
+<p>Organizations providing promotional or sponsored access codes do not automatically receive access to the private records of users who redeem those codes.</p>
+<h3>Legal Requirements</h3>
+<p>We may disclose information when required by applicable law, valid legal process, or when reasonably necessary to protect the security, rights, and safety of our users, our services, or others.</p>
+<h3>Business Transfers</h3>
+<p>If RightDesk Reports is involved in a merger, acquisition, restructuring, or sale of assets, information may be transferred as part of that transaction, subject to applicable law.</p>
+<p>If a material change affects how personal information is handled, we will provide notice as required.</p>
+<h2>6. Sensitive Workplace Information</h2>
+<p>RightDesk Reports is designed to help individuals document workplace experiences.</p>
+<p>These records may include sensitive information about employment relationships, workplace conflicts, harassment, discrimination, disciplinary actions, medical concerns, and other personal circumstances.</p>
+<p>Your records may also contain information about third parties, including colleagues, managers, witnesses, and human resources personnel.</p>
+<p>You are responsible for determining what information you choose to enter.</p>
+<p>We encourage users to include information relevant to their documentation needs and to avoid including unnecessary sensitive details.</p>
+<p>Information about other individuals should be handled responsibly and in accordance with applicable laws.</p>
+<p>RightDesk Reports uses this information to provide the documentation and reporting functions described in this Privacy Policy.</p>
+<h2>7. Data Retention and Account Deletion</h2>
+<h3>Keeping Your Information</h3>
+<p>We generally retain account information, workplace records, attachments, and saved reports while your account remains active, unless you delete the information or request account deletion.</p>
+<p>Certain technical, transaction, and operational records may be maintained for shorter or longer periods based on service requirements, security needs, or legal obligations.</p>
+<h3>Deleting Individual Records</h3>
+<p>You may delete individual incident records and saved reports using available application features.</p>
+<p>Associated files or copies may remain temporarily in provider backups or other systems until applicable retention or deletion processes are completed.</p>
+<h3>Requesting Account Deletion</h3>
+<p>You may request deletion of your RightDesk Reports account and associated personal information.</p>
+<p>Account deletion requests can be submitted through:</p>
+<p><a href="https://rightdeskreports.com/delete-account/">https://rightdeskreports.com/delete-account/</a></p>
+<p>You may also contact:</p>
+<p><a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a></p>
+<p>For security purposes, we may request reasonable information to verify your identity before processing a deletion request.</p>
+<p>We aim to complete verified deletion requests within 30 days, subject to applicable legal requirements, technical limitations, and legitimate retention exceptions.</p>
+<p>Account deletion is intended to remove the account and associated records from our active application systems, including applicable incident records, saved reports, and stored attachments.</p>
+<h3>Information That May Be Retained</h3>
+<p>Certain information may remain after account deletion when retention is necessary or permitted, including:</p>
+<ul>
+<li>Financial or subscription records required for accounting or legal compliance</li>
+<li>Information necessary to resolve disputes or prevent fraud</li>
+<li>Records subject to lawful preservation requirements</li>
+<li>Security or operational records maintained for legitimate purposes</li>
+<li>Data contained in routine backups until those backups expire or are overwritten</li>
+<li>Aggregate or de-identified statistical information that can no longer reasonably identify an individual</li>
+</ul>
+<h3>Deleting the Application</h3>
+<p>Uninstalling RightDesk Reports from your device does not automatically delete your account or information stored in our cloud systems.</p>
+<p>To request complete account deletion, use the process described above.</p>
+<h3>Canceling Subscriptions</h3>
+<p>Deleting your account does not necessarily cancel a subscription managed by Google Play or Stripe.</p>
+<p>To prevent future subscription charges, cancel your subscription through the applicable payment provider or available subscription management process.</p>
+<h2>8. Your Privacy Rights and Choices</h2>
+<p>Depending on where you live and the laws applicable to your information, you may have rights relating to your personal data.</p>
+<p>These may include the right to:</p>
+<ul>
+<li>Request access to personal information</li>
+<li>Request correction of inaccurate information</li>
+<li>Request deletion of personal information</li>
+<li>Request a copy of certain information</li>
+<li>Object to or restrict certain processing activities</li>
+<li>Withdraw consent where processing is based on consent</li>
+<li>Exercise other rights available under applicable privacy laws</li>
+</ul>
+<p>You may edit or delete certain information directly within RightDesk Reports.</p>
+<p>You may also export available reports through supported application features.</p>
+<p>For additional privacy requests, email <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a>.</p>
+<p>We will review and respond to requests within the timeframes required by applicable law. Where feasible, we aim to respond within 30 days.</p>
+<p>We will not unlawfully discriminate against users for exercising applicable privacy rights.</p>
+<p>If you reside in a jurisdiction that provides the right to contact a privacy supervisory authority, you may also exercise that right.</p>
+<h3>Analytics and Browser Choices</h3>
+<p>You can manage certain cookies and tracking preferences through your browser or device settings.</p>
+<p>Disabling cookies or restricting identifiers may affect certain analytics or website functions.</p>
+<h2>9. International Data Processing</h2>
+<p>RightDesk Reports is operated from the United States and uses service providers that may process information in the United States or other countries.</p>
+<p>If you access the service from outside the United States, your information may be transferred to and processed in jurisdictions with different data protection laws.</p>
+<p>Where applicable law requires additional safeguards for international transfers, we will use appropriate legal mechanisms and service-provider arrangements.</p>
+<h2>10. Children's Privacy</h2>
+<p>RightDesk Reports is intended for working adults and is not directed toward children.</p>
+<p>We do not knowingly collect personal information from children under 16.</p>
+<p>If we learn that we have collected personal information from a child under 16 without appropriate authorization, we will take reasonable steps to delete that information.</p>
+<p>If you believe a child has provided personal information through RightDesk Reports, contact <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a>.</p>
+<h2>11. Changes to This Privacy Policy</h2>
+<p>We may update this Privacy Policy to reflect changes in our services, technology, legal requirements, or data practices.</p>
+<p>When changes are made, we will update the effective date shown at the beginning of this policy.</p>
+<p>For material changes affecting how personal information is collected, used, or shared, we will provide additional notice where appropriate or legally required.</p>
+<p>Continued use of the service after changes take effect is subject to applicable law and any consent requirements.</p>
+<h2>12. Contact Information</h2>
+<p>For questions about this Privacy Policy or requests involving your personal information, contact:</p>
+<p><strong>Privacy and data requests:</strong> <a href="mailto:privacy@rightdeskreports.com">privacy@rightdeskreports.com</a></p>
+<p><strong>Account and technical support:</strong> <a href="mailto:support@rightdeskreports.com">support@rightdeskreports.com</a></p>
+<p><strong>Attorney partnerships:</strong> <a href="mailto:attorneys@rightdeskreports.com">attorneys@rightdeskreports.com</a></p>
+<p><strong>Website:</strong> <a href="https://rightdeskreports.com">https://rightdeskreports.com</a></p>
+<p><strong>Application:</strong> <a href="https://app.rightdeskreports.com">https://app.rightdeskreports.com</a></p>
+<p><strong>Operator:</strong> The Marketing Millennial</p>
+<p>RightDesk Reports is committed to providing a practical way for employees to document their workplace experiences while treating the information entrusted to us with care and respect.</p>
 </div>
 
 <!-- FOOTER -->
